@@ -33,6 +33,7 @@ namespace SmurfWalletOW.Service
                 {
                     secure.AppendChar(c);
                 }
+                key = secure;
             }
 
             byte[] iv = new byte[16];
@@ -100,6 +101,7 @@ namespace SmurfWalletOW.Service
                 {
                     secure.AppendChar(c);
                 }
+                key = secure;
             }
 
             byte[] iv = new byte[16];

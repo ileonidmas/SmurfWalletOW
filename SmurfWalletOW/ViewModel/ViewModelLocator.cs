@@ -26,6 +26,7 @@ namespace SmurfWalletOW.ViewModel
                 SimpleIoc.Default.Register<IFileService, FileService>();
                 SimpleIoc.Default.Register<IEncryptionService, EncryptionService>();
                 SimpleIoc.Default.Register<IDialogService, DialogService>();
+                SimpleIoc.Default.Register<IOverwatchService, OverwatchService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();

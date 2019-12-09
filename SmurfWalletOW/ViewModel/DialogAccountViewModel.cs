@@ -49,16 +49,11 @@ namespace SmurfWalletOW.ViewModel
             _setCommand = new RelayCommand<object[]>((w) => OnSetClicked(w));
             _cancelCommand = new RelayCommand<Window>((w) => OnCancelClicked(w));
         }
-
-
-        //parameters[0] - password
-        //parameter[1] - key
-        //parameter[2] - windowOwner
+        
         private void OnSetClicked(object[] parameters)
         {
             SecureString value = (parameters[1] as PasswordBox).SecurePassword;
-            Account.Password = _encryptionService.EncryptString((parameters[1] as PasswordBox).SecurePassword, (parameters[0] as PasswordBox).SecurePassword, Account.ManualEncryption);
-            //SecureString test = _encryptionService.DecryptString((parameters[1] as PasswordBox).SecurePassword, Account.Password, Account.ManualEncryption);                      
+            Account.Password = _encryptionService.EncryptString((parameters[1] as PasswordBox).SecurePassword, (parameters[0] as PasswordBox).SecurePassword, Account.ManualEncryption);                   
             this.CloseDialogWithResult(parameters[2] as Window, DialogResult.Yes);
         }
 
