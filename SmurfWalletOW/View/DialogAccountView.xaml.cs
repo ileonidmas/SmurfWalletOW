@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmurfWalletOW
+namespace SmurfWalletOW.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DialogAccountView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DialogAccountView : UserControl
     {
-        public MainWindow()
+        public DialogAccountView()
         {
             InitializeComponent();
         }

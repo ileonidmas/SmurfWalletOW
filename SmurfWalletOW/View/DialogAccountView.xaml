@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SmurfWalletOW.View.DialogAccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmurfWalletOW.View"
+             mc:Ignorable="d" Height="250.82" Width="184.016"
+             d:DataContext="{Binding DialogAccountViewModel, Source={StaticResource Locator}}">
+    <Grid>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="{Binding Account.Email}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="textboxPassword" HorizontalAlignment="Left" Height="23" Margin="10,100,0,0"  VerticalAlignment="Top" Width="120"/>
+        <CheckBox Content="Manual Encription" IsChecked="{Binding Account.ManualEncryption}" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
+        <Label Content="Encryption Key" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="masterPassword" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="23" Margin="10,179,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Set" Command="{Binding SetCommand}" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Width="75">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                    <Binding ElementName="textboxPassword"/>
+                    <Binding ElementName="masterPassword"/>
+                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+        <Button Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="90,207,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</UserControl>

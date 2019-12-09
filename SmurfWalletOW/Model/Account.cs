@@ -10,7 +10,12 @@ namespace SmurfWalletOW.Model
     {
         private string _email;
         private string _password;
+        private bool _manualEncription;
 
+        public Account()
+        {
+            
+        }
         public Account(string email,string password)
         {
             _password = password;
@@ -28,6 +33,12 @@ namespace SmurfWalletOW.Model
         {
             get => _password;
             set => Set(ref _password, value);
+        }
+
+        public bool ManualEncryption
+        {
+            get => _manualEncription;
+            set => Set(ref _manualEncription, value);
         }
     }
 }

@@ -10,18 +10,18 @@ namespace SmurfWalletOW.Service
 {
     public class FileService : IFileService
     {
-        public Task<IEnumerable<Account>> GetDefaulAccounts()
+        public Task<IEnumerable<Account>> GetDefaultAccountsAsync()
         {
             return Task.Factory.StartNew(GetList);
         }
 
 
-        public Task<bool> AddAccount(Account account)
+        public Task<bool> AddAccountAsync(Account account)
         {
             return Task.Factory.StartNew(() => Delete(account));
         }
 
-        public Task<bool> DeleteAccount(Account account)
+        public Task<bool> DeleteAccountAsync(Account account)
         {
 
             return Task.Factory.StartNew(()=> Delete(account));

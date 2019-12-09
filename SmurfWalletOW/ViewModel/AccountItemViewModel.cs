@@ -14,7 +14,7 @@ namespace SmurfWalletOW.ViewModel
         public Account Account => _account;
 
 
-        public AccountItemViewModel( Account account)
+        public AccountItemViewModel(Account account)
         {
             _account = account;
         }

@@ -24,11 +24,12 @@ namespace SmurfWalletOW.ViewModel
             else
             {
                 SimpleIoc.Default.Register<IFileService, FileService>();
+                SimpleIoc.Default.Register<IEncryptionService, EncryptionService>();
+                SimpleIoc.Default.Register<IDialogService, DialogService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountListViewModel>();
-            SimpleIoc.Default.Register<AccountItemViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -44,6 +45,15 @@ namespace SmurfWalletOW.ViewModel
         public AccountItemViewModel AccountItemViewModel
         {
             get { return SimpleIoc.Default.GetInstance<AccountItemViewModel>(); }
+        }
+        public DialogYesNoViewModel DialogYesNoViewModel
+        {
+            get { return SimpleIoc.Default.GetInstance<DialogYesNoViewModel>(); }
+        }
+
+        public DialogAccountViewModel DialogAccountViewModel
+        {
+            get { return SimpleIoc.Default.GetInstance<DialogAccountViewModel>(); }
         }
     }
 }
