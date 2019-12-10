@@ -53,9 +53,10 @@ namespace SmurfWalletOW.Service
             var wh = app.MainWindowHandle;
             SetForegroundWindow(wh);
 
+            Thread.Sleep(4000);
             SendKeys.SendWait(account.Email);
             SendKeys.SendWait("{TAB}");
-            Thread.Sleep(50);
+            Thread.Sleep(500);
             IntPtr valuePtr = IntPtr.Zero;
             try
             {
@@ -71,8 +72,7 @@ namespace SmurfWalletOW.Service
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
 
-            SendKeys.SendWait("{TAB}");
-            Thread.Sleep(50);
+            Thread.Sleep(500);
             SendKeys.SendWait("{ENTER}");
             return true;
         }
