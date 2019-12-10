@@ -7,14 +7,32 @@
              mc:Ignorable="d" Height="250.82" Width="184.016"
              d:DataContext="{Binding DialogAccountViewModel, Source={StaticResource Locator}}">
     <Grid>
-        <Label Content="Email" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="{Binding Account.Email}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="textboxPassword" HorizontalAlignment="Left" Height="23" Margin="10,100,0,0"  VerticalAlignment="Top" Width="120"/>
-        <CheckBox Content="Manual Encription" IsChecked="{Binding Account.ManualEncryption}" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
-        <Label Content="Encryption Key" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="masterPassword" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="23" Margin="10,179,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Set" Command="{Binding SetCommand}" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Width="75">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Display Name" HorizontalAlignment="Left" />
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Account.DisplayName}"  />
+        <Label Grid.Row="2" Grid.ColumnSpan="2" Content="Email" HorizontalAlignment="Left" />
+        <TextBox Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Account.Email}"  />
+        <Label Grid.Row="4" Grid.ColumnSpan="2" Content="Password" HorizontalAlignment="Left"/>
+        <PasswordBox Grid.Row="5" Grid.ColumnSpan="2" Name="textboxPassword"  />
+        <CheckBox Grid.Row="6" Grid.ColumnSpan="2" Content="Manual Encription" IsChecked="{Binding Account.ManualEncryption}" VerticalAlignment="Center" />
+        <Label Grid.Row="7" Grid.ColumnSpan="2" Content="Encryption Key" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" />
+        <PasswordBox Grid.Row="8" Grid.ColumnSpan="2" Name="masterPassword" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
+        <Button Grid.Row="9"  Content="Set" Command="{Binding SetCommand}" >
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource MultiValueConverter}">
                     <Binding ElementName="textboxPassword"/>
@@ -23,7 +41,7 @@
                 </MultiBinding>
             </Button.CommandParameter>
         </Button>
-        <Button Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="90,207,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Grid.Row="9" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}"/>
 
     </Grid>
 </UserControl>

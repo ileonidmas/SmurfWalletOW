@@ -24,6 +24,7 @@ namespace SmurfWalletOW.ViewModel
             else
             {
                 SimpleIoc.Default.Register<IFileService, FileService>();
+                SimpleIoc.Default.Register<IAppSettingsService, AppSettingsService>();
                 SimpleIoc.Default.Register<IEncryptionService, EncryptionService>();
                 SimpleIoc.Default.Register<IDialogService, DialogService>();
                 SimpleIoc.Default.Register<IOverwatchService, OverwatchService>();
@@ -31,30 +32,35 @@ namespace SmurfWalletOW.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountListViewModel>();
+            SimpleIoc.Default.Register<SettingsViewModel>();
         }
 
         public MainViewModel MainViewModel
         {
-            get { return SimpleIoc.Default.GetInstance<MainViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
         }
 
         public AccountListViewModel AccountListViewModel
         {
-            get { return SimpleIoc.Default.GetInstance<AccountListViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<AccountListViewModel>(); }
         }
 
-        public AccountItemViewModel AccountItemViewModel
-        {
-            get { return SimpleIoc.Default.GetInstance<AccountItemViewModel>(); }
-        }
+        //public AccountItemViewModel AccountItemViewModel
+        //{
+        //    get { return ServiceLocator.Current.GetInstance<AccountItemViewModel>(); }
+        //}
         public DialogYesNoViewModel DialogYesNoViewModel
         {
-            get { return SimpleIoc.Default.GetInstance<DialogYesNoViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<DialogYesNoViewModel>(); }
         }
 
         public DialogAccountViewModel DialogAccountViewModel
         {
-            get { return SimpleIoc.Default.GetInstance<DialogAccountViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<DialogAccountViewModel>(); }
+        }
+        public SettingsViewModel SettingsViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SettingsViewModel>(); }
         }
     }
 }

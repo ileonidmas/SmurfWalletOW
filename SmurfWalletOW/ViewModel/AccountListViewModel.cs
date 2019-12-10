@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,13 +24,20 @@ namespace SmurfWalletOW.ViewModel
         private RelayCommand<object[]> _deleteAccountCommand;
         private RelayCommand<object> _playCommand;
         private RelayCommand<object> _addAccountCommand;
-        private ObservableCollection<AccountItemViewModel> _accountList;
+
+        private RelayCommand _loadCommand;
+        private ObservableCollection<Account> _accountList = new ObservableCollection<Account>();
 
 
-        public ObservableCollection<AccountItemViewModel> AccountList
+        public ObservableCollection<Account> AccountList
         {
             get => _accountList;
             set => Set(ref _accountList, value);
+        }
+        public RelayCommand LoadCommand
+        {
+            get => _loadCommand;
+            set => Set(ref _loadCommand, value);
         }
         public RelayCommand<object> AddAccountCommand
         {
@@ -56,20 +64,17 @@ namespace SmurfWalletOW.ViewModel
             _addAccountCommand = new RelayCommand<object>((parameter) => AddAccount(parameter));
             _deleteAccountCommand = new RelayCommand<object[]>((parameter) => DeleteAccount(parameter));
             _playCommand = new RelayCommand<object>((parameter) => Play(parameter));
-
-            AccountList = new ObservableCollection<AccountItemViewModel>();
-            //temp
-            Load();
+            _loadCommand = new RelayCommand(Load);
         }
 
 
 
         private async void Load()
         {
-            var list = await _fileService.GetDefaultAccountsAsync();
+            var list = await _fileService.GetAccountsAsync();
             foreach(var account in list)
             {
-                AccountList.Add(new AccountItemViewModel(account));
+                AccountList.Add(account);
             }
         }
 
@@ -81,7 +86,7 @@ namespace SmurfWalletOW.ViewModel
             if (result == DialogResult.Yes)
             {
                 if (await _fileService.AddAccountAsync(account)) { 
-                    AccountList.Add(new AccountItemViewModel(account));
+                    AccountList.Add(account);
                 }
                 else
                 {
@@ -93,13 +98,13 @@ namespace SmurfWalletOW.ViewModel
 
         private async void DeleteAccount(object[] parameters)
         {
-            var accountViewModel = parameters[0] as AccountItemViewModel;
+            var account = parameters[0] as Account;
             DialogResult result = _dialogService.ShowDialogYesNo("Are you sure you want to delete this entry?", parameters[1] as Window);
             if (result == DialogResult.Yes)
             {
-                if (await _fileService.DeleteAccountAsync(accountViewModel.Account))
+                if (await _fileService.DeleteAccountAsync(account))
                 {
-                    AccountList.Remove(accountViewModel);
+                    AccountList.Remove(account);
                 }
                 else
                 {
@@ -112,7 +117,7 @@ namespace SmurfWalletOW.ViewModel
 
         private async void Play(object parameter)
         {
-            await _overwatchService.StartGameAsync((parameter as AccountItemViewModel).Account);
+            await _overwatchService.StartGameAsync(parameter as Account);
             //SecureString test = _encryptionService.DecryptString((parameters[1] as PasswordBox).SecurePassword, Account.Password, Account.ManualEncryption);               
         }
     }

@@ -4,18 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:SmurfWalletOW.View"
+             xmlns:behaviors="clr-namespace:SmurfWalletOW.Behavior"            
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:styles="http://metro.mahapps.com/winfx/xaml/shared"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{Binding AccountListViewModel, Source={StaticResource Locator}}">
-    <Grid>
-        <ListBox HorizontalAlignment="Left" Height="147" Margin="10,10,0,0" VerticalAlignment="Top" Width="145" ItemsSource="{Binding AccountList}">
+    <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0"  ItemsSource="{Binding AccountList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <view:AccountItemView/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Button"  Command="{Binding AddAccountCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Button Grid.Row="1"   Command="{Binding AddAccountCommand}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" >
+            <iconPacks:PackIconModern Width="24" Height="24" Kind="Add" />
+            <Button.Background>
+                <SolidColorBrush Opacity="0" Color="White"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </UserControl>

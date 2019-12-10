@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:model="clr-namespace:SmurfWalletOW.Model"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{Binding AccountItemViewModel, Source={StaticResource Locator}}">
+             d:DataContext="{d:DesignInstance Type=model:Account, IsDesignTimeCreatable=False}" 
+            >
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Label Content="{Binding Account.Email}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="{Binding DisplayName}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <Button Content="Play" Command="{Binding DataContext.PlayCommand,  RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75"/>
             <Button Content="Delete" Command="{Binding DataContext.DeleteAccountCommand,  RelativeSource={RelativeSource AncestorType=ListBox}}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75">
                 <Button.CommandParameter>

@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -58,31 +59,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behavior\BehaviorBase.cs" />
+    <Compile Include="Behavior\LoadingBehavior.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\MultiValueConverter.cs" />
+    <Compile Include="Enums\AppSettingsKeys.cs" />
     <Compile Include="Enums\DialogResults.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Service\AppSettingsService.cs" />
     <Compile Include="Service\DialogService.cs" />
     <Compile Include="Service\EncryptionService.cs" />
     <Compile Include="Service\FileService.cs" />
+    <Compile Include="Service\Interface\IAppSettingsService.cs" />
     <Compile Include="Service\Interface\IDialogService.cs" />
     <Compile Include="Service\Interface\IEncryptionService.cs" />
     <Compile Include="Service\Interface\IFileService.cs" />
     <Compile Include="Service\Interface\IOverwatchService.cs" />
     <Compile Include="Service\OverwatchService.cs" />
-    <Compile Include="ViewModel\AccountItemViewModel.cs" />
     <Compile Include="ViewModel\AccountListViewModel.cs" />
     <Compile Include="ViewModel\DialogAccountViewModel.cs" />
     <Compile Include="ViewModel\DialogViewModelBase.cs" />
     <Compile Include="ViewModel\DialogYesNoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AccountItemView.xaml.cs">
       <DependentUpon>AccountItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AccountListView.xaml.cs">
       <DependentUpon>AccountListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wrapper\SecureStringWrapper.cs" />
     <Page Include="View\DialogAccountView.xaml">
@@ -123,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AccountListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

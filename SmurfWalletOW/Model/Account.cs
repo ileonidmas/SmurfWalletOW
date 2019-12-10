@@ -8,18 +8,28 @@ namespace SmurfWalletOW.Model
 {
     public class Account : ModelBase
     {
+
+        private string _displayName;
         private string _email;
         private string _password;
         private bool _manualEncription;
+        private string _id;
 
         public Account()
         {
-            
+            _id = Guid.NewGuid().ToString();
         }
-        public Account(string email,string password)
+
+        public string Id
         {
-            _password = password;
-            _email = email;
+            get => _id;
+            set => Set(ref _id, value);
+        }
+        
+        public string DisplayName
+        {
+            get => _displayName;
+            set => Set(ref _displayName, value);
         }
 
         public string Email

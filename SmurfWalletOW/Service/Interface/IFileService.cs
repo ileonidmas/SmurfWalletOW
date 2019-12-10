@@ -9,11 +9,14 @@ namespace SmurfWalletOW.Service.Interface
 {
     public interface IFileService
     {
-        Task<IEnumerable<Account>> GetDefaultAccountsAsync();
+        Task<List<Account>> GetAccountsAsync();
 
         Task<bool> DeleteAccountAsync(Account account);
 
         Task<bool> AddAccountAsync(Account account);
+
+        Task<Settings> GetSettingsAsync();
+        Task<bool> SaveSettingsAsync(Settings settings);
 
     }
 }

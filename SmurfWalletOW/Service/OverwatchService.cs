@@ -43,11 +43,19 @@ namespace SmurfWalletOW.Service
             app.Start();
             app.PriorityClass = ProcessPriorityClass.High;
 
-            Thread.Sleep(10000);
+
+            while (app.MainWindowTitle != "Overwatch")
+            {
+                Thread.Sleep(10);
+                app.Refresh();
+            }
+
+            var wh = app.MainWindowHandle;
+            SetForegroundWindow(wh);
+
             SendKeys.SendWait(account.Email);
-            Thread.Sleep(3000);
             SendKeys.SendWait("{TAB}");
-            Thread.Sleep(3000);
+            Thread.Sleep(50);
             IntPtr valuePtr = IntPtr.Zero;
             try
             {
@@ -63,11 +71,8 @@ namespace SmurfWalletOW.Service
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
 
-            Thread.Sleep(3000);
             SendKeys.SendWait("{TAB}");
-
-            Thread.Sleep(3000);
-
+            Thread.Sleep(50);
             SendKeys.SendWait("{ENTER}");
             return true;
         }

@@ -7,9 +7,17 @@
              mc:Ignorable="d" 
             d:DesignHeight="100" d:DesignWidth="300"  
              d:DataContext="{Binding DialogYesNoViewModel, Source={StaticResource Locator}}">
-    <Grid Margin="4">
-        <Label Content="{Binding Message}" HorizontalAlignment="Left" Margin="105,50,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Yes" Command="{Binding YesCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Margin="135,70,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="No"  Command="{Binding NoCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Margin="215,70,0,0" VerticalAlignment="Top" Width="75"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Message}"/>
+        <Button Grid.Row="1" Content="Yes" Command="{Binding YesCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5" />
+        <Button Grid.Row="1" Grid.Column="1" Content="No"  Command="{Binding NoCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5" />
     </Grid>
 </UserControl>
