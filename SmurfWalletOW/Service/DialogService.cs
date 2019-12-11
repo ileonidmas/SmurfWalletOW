@@ -1,4 +1,7 @@
 ﻿
+using CommonServiceLocator;
+using GalaSoft.MvvmLight.Ioc;
+using SmurfWalletOW.Enums;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using SmurfWalletOW.View;
@@ -6,6 +9,7 @@ using SmurfWalletOW.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,7 +21,7 @@ namespace SmurfWalletOW.Service
     {
 
         public DialogResult ShowDialogYesNo(string message, Window owner)
-        {
+        {            
             DialogViewModelBase vm = new DialogYesNoViewModel(message);
             return ShowDialog(vm, owner);
         }
@@ -28,6 +32,18 @@ namespace SmurfWalletOW.Service
             return ShowDialog(vm, owner);
         }
 
+
+        public DialogResult ShowDialogEncryptionkey(SecureString key, Window owner)
+        {
+            DialogEncryptionKeyViewModel vm = new DialogEncryptionKeyViewModel(key);
+            return ShowDialog(vm, owner);
+        }
+
+        public DialogResult ShowDialogSettings(Settings settings, Window owner)
+        {
+            DialogSettingsViewModel vm = new DialogSettingsViewModel(settings);
+            return ShowDialog(vm, owner);
+        }
 
         private DialogResult ShowDialog(DialogViewModelBase vm, Window owner)
         {

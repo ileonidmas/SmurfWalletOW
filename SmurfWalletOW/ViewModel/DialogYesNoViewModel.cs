@@ -11,6 +11,12 @@ namespace SmurfWalletOW.ViewModel
 {
     public class DialogYesNoViewModel : DialogViewModelBase
     {
+        private string _message;
+        public string Message
+        {
+            get => _message;
+            set => Set(ref _message, value);
+        }
         private RelayCommand<Window> yesCommand = null;
         public RelayCommand<Window> YesCommand
         {
@@ -25,8 +31,11 @@ namespace SmurfWalletOW.ViewModel
             set { noCommand = value; }
         }
 
-        public DialogYesNoViewModel(string message) : base(message)
+        public DialogYesNoViewModel(string message) 
         {
+            Title = "Message";
+            Message = message;
+
             this.yesCommand = new RelayCommand<Window>((w) => OnYesClicked(w));
             this.noCommand = new RelayCommand<Window>((w) => OnNoClicked(w));
         }

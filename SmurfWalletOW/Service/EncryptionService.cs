@@ -16,7 +16,7 @@ namespace SmurfWalletOW.Service
 {
     public class EncryptionService : IEncryptionService
     {
-        public string EncryptString(SecureString key, SecureString plainText, bool manual)
+        public string EncryptString(SecureString masterKey, SecureString password, bool manual)
         {
             if (!manual)
             {
@@ -33,7 +33,7 @@ namespace SmurfWalletOW.Service
                 {
                     secure.AppendChar(c);
                 }
-                key = secure;
+                masterKey = secure;
             }
 
             byte[] iv = new byte[16];
@@ -41,24 +41,24 @@ namespace SmurfWalletOW.Service
 
             //confirm that length is at least 16, otherwise cut
 
-            if (key.Length < 16)
+            if (masterKey.Length < 16)
             {
-                while (key.Length != 16)
+                while (masterKey.Length != 16)
                 {
-                    key.AppendChar('0');
+                    masterKey.AppendChar('0');
                 }
             }
-            else if (key.Length > 16)
+            else if (masterKey.Length > 16)
             {
-                while (key.Length != 16)
+                while (masterKey.Length != 16)
                 {
-                    key.RemoveAt(key.Length - 1);
+                    masterKey.RemoveAt(masterKey.Length - 1);
                 }
             }
 
-            using (SecureStringWrapper keyWrapper = new SecureStringWrapper(key))
+            using (SecureStringWrapper keyWrapper = new SecureStringWrapper(masterKey))
             {
-                using (SecureStringWrapper passwordWrapper = new SecureStringWrapper(plainText))
+                using (SecureStringWrapper passwordWrapper = new SecureStringWrapper(password))
                 {
 
                     byte[] keyBytes = keyWrapper.ToByteArray();
@@ -84,7 +84,7 @@ namespace SmurfWalletOW.Service
             return Convert.ToBase64String(array);
         }
 
-        public SecureString DecryptString(SecureString key, string cipherText, bool manual)
+        public SecureString DecryptString(SecureString masterKey, string password, bool manual)
         {
             if (!manual)
             {
@@ -101,27 +101,27 @@ namespace SmurfWalletOW.Service
                 {
                     secure.AppendChar(c);
                 }
-                key = secure;
+                masterKey = secure;
             }
 
             byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
+            byte[] buffer = Convert.FromBase64String(password);
 
-            if (key.Length < 16)
+            if (masterKey.Length < 16)
             {
-                while (key.Length != 16)
+                while (masterKey.Length != 16)
                 {
-                    key.AppendChar('0');
+                    masterKey.AppendChar('0');
                 }
             }
-            else if (key.Length > 16)
+            else if (masterKey.Length > 16)
             {
-                while (key.Length != 16)
+                while (masterKey.Length != 16)
                 {
-                    key.RemoveAt(key.Length - 1);
+                    masterKey.RemoveAt(masterKey.Length - 1);
                 }
             }
-            using (SecureStringWrapper wrapper = new SecureStringWrapper(key))
+            using (SecureStringWrapper wrapper = new SecureStringWrapper(masterKey))
             {
 
                 byte[] keyBytes = wrapper.ToByteArray();

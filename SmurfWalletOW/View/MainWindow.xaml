@@ -6,41 +6,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:SmurfWalletOW.View"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:behaviors="clr-namespace:SmurfWalletOW.Behavior"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Background="AliceBlue"
-        Height="400"
-        Width="900"
-        WindowStartupLocation="CenterScreen"
+        Title="SmurfWalletOw"
+        Background="{StaticResource OverwatchGreyColor}"        
+        TitleForeground="{StaticResource OverwatchWhiteColor}"
+        WindowTitleBrush="{StaticResource OverwatchOrangeColor}"
+        BorderBrush="{StaticResource OverwatchBlackColor}"
+        Height="500"
+        Width="300"
+    
+        ShowMinButton="False"
+        ShowMaxRestoreButton="False"
+        ResizeMode="NoResize"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
     <controls:MetroWindow.RightWindowCommands>
-        <controls:WindowCommands>
-            <Button Content="settings" >
+        <controls:WindowCommands Background="Black">
+            <Button Content="settings" Command="{Binding OpenSettingsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  >
                 <Button.Background>
-                    <SolidColorBrush Opacity="0.5" Color="White"/>
-                </Button.Background>
-            </Button>
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconModern Width="24" Height="24" Kind="Add" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="deploy cupcakes" />
-                </StackPanel>
-                <Button.Background>
-                    <SolidColorBrush Opacity="0.5" Color="White"/>
+                    <SolidColorBrush Opacity="0" Color="White"/>
                 </Button.Background>
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
+   
 
-
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <view:AccountListView Grid.Column="0"/>
-        <view:SettingsView Grid.Column="1"/>
+    <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}">
+        <view:AccountListView />
     </Grid>
 </controls:MetroWindow>

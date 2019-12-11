@@ -11,10 +11,18 @@ namespace SmurfWalletOW.ViewModel
 {
     public abstract class DialogViewModelBase : ViewModelBase
     {
+        private string _title;
+        private DialogResult _userDialogResult;
+
+        public string Title
+        {
+            get => _title;
+            set => Set(ref _title, value);
+        }
         public DialogResult UserDialogResult
         {
-            get;
-            private set;
+            get => _userDialogResult;
+            set => Set(ref _userDialogResult, value);
         }
 
         public void CloseDialogWithResult(Window dialog, DialogResult result)
@@ -24,19 +32,5 @@ namespace SmurfWalletOW.ViewModel
                 dialog.DialogResult = true;
         }
 
-        public string Message
-        {
-            get;
-            private set;
-        }
-
-        public DialogViewModelBase(string message)
-        {
-            this.Message = message;
-        }
-
-        public DialogViewModelBase()
-        {         
-        }
     }
 }

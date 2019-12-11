@@ -2,6 +2,7 @@
 using SmurfWalletOW.Enums;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -104,6 +105,7 @@ namespace SmurfWalletOW.Service
         {
             Settings settings = new Settings();
             settings.OverwatchPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultOverwatchPath).Result;
+            settings.LoadingTime = Convert.ToInt32(_appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultLoadingTime).Result);
             return settings;
         }
 

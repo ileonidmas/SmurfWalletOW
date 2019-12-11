@@ -9,7 +9,7 @@ namespace SmurfWalletOW.Model
     public class Settings : ModelBase
     {
         private string _overwatchPath;
-
+        private int _loadingTime;
         public Settings()
         {
         }
@@ -18,6 +18,12 @@ namespace SmurfWalletOW.Model
         {
             get => _overwatchPath;
             set => Set(ref _overwatchPath, value);
+        }
+
+        public int LoadingTime
+        {
+            get => _loadingTime;
+            set => Set(ref _loadingTime, value);
         }
     }
 }

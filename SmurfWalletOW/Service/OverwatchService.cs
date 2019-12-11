@@ -25,21 +25,26 @@ namespace SmurfWalletOW.Service
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
 
+        private IFileService _fileService;
         private IEncryptionService _encryptionService;
-        public OverwatchService(IEncryptionService encryptionService)
+        public OverwatchService(IEncryptionService encryptionService, IFileService fileService)
         {
             _encryptionService = encryptionService;
+            _fileService = fileService;
         }
 
-        public Task<bool> StartGameAsync(Account account)
+        public Task<bool> StartGameAsync(SecureString key, Account account)
         {
-            return Task.Factory.StartNew(()=>StartGame(account));
+            return Task.Factory.StartNew(()=>StartGame(key, account));
         }
 
-        private bool StartGame(Account account)
+        private bool StartGame(SecureString key, Account account)
         {
             Process app = new Process();
-            app.StartInfo.FileName = @"C:\Program Files (x86)\Overwatch\_retail_\Overwatch.exe";
+            var settings = _fileService.GetSettingsAsync().Result;
+            var path = settings.OverwatchPath;
+            var loadingTime = settings.LoadingTime * 1000;
+            app.StartInfo.FileName = path;
             app.Start();
             app.PriorityClass = ProcessPriorityClass.High;
 
@@ -53,16 +58,18 @@ namespace SmurfWalletOW.Service
             var wh = app.MainWindowHandle;
             SetForegroundWindow(wh);
 
-            Thread.Sleep(4000);
+            Thread.Sleep(loadingTime);
             SendKeys.SendWait(account.Email);
+            Thread.Sleep(750);
             SendKeys.SendWait("{TAB}");
-            Thread.Sleep(500);
+            Thread.Sleep(750);
             IntPtr valuePtr = IntPtr.Zero;
             try
             {
-                var test = _encryptionService.DecryptString(null, account.Password, account.ManualEncryption);
-                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(test);
-                for (int i = 0; i < test.Length; i++)
+                var pw = _encryptionService.DecryptString(key, account.Password, account.ManualEncryption);
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(pw);
+                
+                for (int i = 0; i < pw.Length; i++)
                 {
                     SendKeys.SendWait(Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)).ToString());
                 }
@@ -72,7 +79,7 @@ namespace SmurfWalletOW.Service
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
 
-            Thread.Sleep(500);
+            Thread.Sleep(750);
             SendKeys.SendWait("{ENTER}");
             return true;
         }

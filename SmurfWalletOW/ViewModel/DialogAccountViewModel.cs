@@ -44,6 +44,7 @@ namespace SmurfWalletOW.ViewModel
 
         public DialogAccountViewModel(Account account)
         {
+            Title = "Account";
             Account = account;
             _encryptionService = SimpleIoc.Default.GetInstance<IEncryptionService>();
             _setCommand = new RelayCommand<object[]>((w) => OnSetClicked(w));
@@ -51,9 +52,8 @@ namespace SmurfWalletOW.ViewModel
         }
         
         private void OnSetClicked(object[] parameters)
-        {
-            SecureString value = (parameters[1] as PasswordBox).SecurePassword;
-            Account.Password = _encryptionService.EncryptString((parameters[1] as PasswordBox).SecurePassword, (parameters[0] as PasswordBox).SecurePassword, Account.ManualEncryption);                   
+        {            
+            Account.Password = _encryptionService.EncryptString((parameters[0] as PasswordBox).SecurePassword, (parameters[1] as PasswordBox).SecurePassword, Account.ManualEncryption);            
             this.CloseDialogWithResult(parameters[2] as Window, DialogResult.Yes);
         }
 

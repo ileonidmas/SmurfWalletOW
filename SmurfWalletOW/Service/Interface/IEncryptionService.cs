@@ -9,7 +9,7 @@ namespace SmurfWalletOW.Service.Interface
 {
     public interface IEncryptionService
     {
-        SecureString DecryptString(SecureString key, string cipherText, bool manual);
-        string EncryptString(SecureString key, SecureString plainText, bool manual);
+        SecureString DecryptString(SecureString masterKey, string password, bool manual);
+        string EncryptString(SecureString masterKey, SecureString password, bool manual);
     }
 }

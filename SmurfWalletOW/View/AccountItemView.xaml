@@ -6,13 +6,27 @@
              xmlns:model="clr-namespace:SmurfWalletOW.Model"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type=model:Account, IsDesignTimeCreatable=False}" 
-            >
+             d:DataContext="{d:DesignInstance Type=model:Account, IsDesignTimeCreatable=False}">
+    <Border BorderBrush="Black" BorderThickness="2">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="{Binding DisplayName}" />
-            <Button Content="Play" Command="{Binding DataContext.PlayCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
-            <Button Content="Delete" Command="{Binding DataContext.DeleteAccountCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Content="{Binding DisplayName}" />
+        <Button Grid.Row="1" Grid.Column="0"  Content="Play" Margin="2" Command="{Binding DataContext.PlayCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}" >
+                        <Binding/>
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="2"  Content="Delete"  Margin="2" Command="{Binding DataContext.DeleteAccountCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MultiValueConverter}" >
                         <Binding/>
@@ -20,8 +34,8 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
-        </StackPanel>
-       
 
-    </Grid>
+
+        </Grid>
+    </Border>
 </UserControl>

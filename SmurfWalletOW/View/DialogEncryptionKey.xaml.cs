@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SmurfWalletOW.View
 {
     /// <summary>
-    /// Interaction logic for SettingsView.xaml
+    /// Interaction logic for DialogEncryptionKey.xaml
     /// </summary>
-    public partial class SettingsView : UserControl
+    public partial class DialogEncryptionKey : UserControl
     {
-        public SettingsView()
+        public DialogEncryptionKey()
         {
             InitializeComponent();
         }

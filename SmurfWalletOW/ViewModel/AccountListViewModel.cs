@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,7 +23,7 @@ namespace SmurfWalletOW.ViewModel
         private readonly IOverwatchService _overwatchService;
 
         private RelayCommand<object[]> _deleteAccountCommand;
-        private RelayCommand<object> _playCommand;
+        private RelayCommand<object[]> _playCommand;
         private RelayCommand<object> _addAccountCommand;
 
         private RelayCommand _loadCommand;
@@ -44,7 +45,7 @@ namespace SmurfWalletOW.ViewModel
             get => _addAccountCommand;
             set => Set(ref _addAccountCommand, value);
         }
-        public RelayCommand<object> PlayCommand
+        public RelayCommand<object[]> PlayCommand
         {
             get => _playCommand;
             set => Set(ref _playCommand, value);
@@ -62,8 +63,8 @@ namespace SmurfWalletOW.ViewModel
             _overwatchService = overwatchService;
 
             _addAccountCommand = new RelayCommand<object>((parameter) => AddAccount(parameter));
-            _deleteAccountCommand = new RelayCommand<object[]>((parameter) => DeleteAccount(parameter));
-            _playCommand = new RelayCommand<object>((parameter) => Play(parameter));
+            _deleteAccountCommand = new RelayCommand<object[]>((parameters) => DeleteAccount(parameters));
+            _playCommand = new RelayCommand<object[]>((parameters) => Play(parameters));
             _loadCommand = new RelayCommand(Load);
         }
 
@@ -115,10 +116,23 @@ namespace SmurfWalletOW.ViewModel
            
         }
 
-        private async void Play(object parameter)
+        private async void Play(object[] parameters)
         {
-            await _overwatchService.StartGameAsync(parameter as Account);
-            //SecureString test = _encryptionService.DecryptString((parameters[1] as PasswordBox).SecurePassword, Account.Password, Account.ManualEncryption);               
+            var account = parameters[0] as Account;
+            SecureString key= new SecureString();
+            if (account.ManualEncryption)
+            {
+                DialogResult result = _dialogService.ShowDialogEncryptionkey(key, parameters[1] as Window);
+                if(result == DialogResult.Yes)
+                {
+                    await _overwatchService.StartGameAsync(key, account);
+                }
+            }
+            else
+            {
+                await _overwatchService.StartGameAsync(key, account);
+            }
+
         }
     }
    

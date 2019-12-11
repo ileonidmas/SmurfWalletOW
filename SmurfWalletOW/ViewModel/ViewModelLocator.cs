@@ -19,7 +19,7 @@ namespace SmurfWalletOW.ViewModel
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                //SimpleIoc.Default.Register<IFileSerivce, Design.DesignDataService>();
+                
             }
             else
             {
@@ -32,7 +32,11 @@ namespace SmurfWalletOW.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountListViewModel>();
-            SimpleIoc.Default.Register<SettingsViewModel>();
+
+            SimpleIoc.Default.Register<DialogYesNoViewModel>();
+            SimpleIoc.Default.Register<DialogEncryptionKeyViewModel>();
+            SimpleIoc.Default.Register<DialogSettingsViewModel>();
+            SimpleIoc.Default.Register<DialogAccountViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -44,11 +48,7 @@ namespace SmurfWalletOW.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AccountListViewModel>(); }
         }
-
-        //public AccountItemViewModel AccountItemViewModel
-        //{
-        //    get { return ServiceLocator.Current.GetInstance<AccountItemViewModel>(); }
-        //}
+        
         public DialogYesNoViewModel DialogYesNoViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DialogYesNoViewModel>(); }
@@ -58,9 +58,16 @@ namespace SmurfWalletOW.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DialogAccountViewModel>(); }
         }
-        public SettingsViewModel SettingsViewModel
+
+        public DialogSettingsViewModel DialogSettingsViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<SettingsViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<DialogSettingsViewModel>(); }
         }
+
+        public DialogEncryptionKeyViewModel DialogEncryptionKeyViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<DialogEncryptionKeyViewModel>(); }
+        }
+
     }
 }

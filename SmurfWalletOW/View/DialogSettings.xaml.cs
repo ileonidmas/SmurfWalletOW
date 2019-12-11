@@ -1,6 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using SmurfWalletOW.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,18 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SmurfWalletOW.View
 {
     /// <summary>
-    /// Interaction logic for DialogWindow.xaml
+    /// Interaction logic for DialogSettings.xaml
     /// </summary>
-    public partial class DialogWindow : MetroWindow
+    public partial class DialogSettings : UserControl
     {
-        public DialogWindow()
+        public DialogSettings()
         {
             InitializeComponent();
         }
+
+
     }
 }

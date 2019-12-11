@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:SmurfWalletOW.View"
+                    xmlns:vm="clr-namespace:SmurfWalletOW.ViewModel">
+    <DataTemplate DataType="{x:Type vm:DialogYesNoViewModel}">
+        <v:DialogYesNo/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogAccountViewModel}">
+        <v:DialogAccountView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogEncryptionKeyViewModel}">
+        <v:DialogEncryptionKey/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogSettingsViewModel}">
+        <v:DialogSettings/>
+    </DataTemplate>
+</ResourceDictionary>

@@ -5,18 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:SmurfWalletOW.View"
              xmlns:behaviors="clr-namespace:SmurfWalletOW.Behavior"            
-            xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:styles="http://metro.mahapps.com/winfx/xaml/shared"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="300"
              DataContext="{Binding AccountListViewModel, Source={StaticResource Locator}}">
     <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <ItemsControl Grid.Row="0"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding AccountList}" >
+        
+        <Button Command="{Binding AddAccountCommand}" Width="24" Height="24" HorizontalAlignment="Right" VerticalAlignment="Bottom" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" >
+            <iconPacks:PackIconModern Width="24" Height="24" Kind="Add" />
+            <Button.Background>
+                <SolidColorBrush Opacity="0" Color="White"/>
+            </Button.Background>
+        </Button>
+        
+        <ItemsControl Grid.Row="0"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AccountList}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
@@ -24,20 +26,16 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <view:AccountItemView/>
+                    <view:AccountItemView Width="100"   Height="50"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Margin" Value="60"/>
+                    <Setter Property="Margin" Value="20"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        <Button Grid.Row="1"   Command="{Binding AddAccountCommand}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" >
-            <iconPacks:PackIconModern Width="24" Height="24" Kind="Add" />
-            <Button.Background>
-                <SolidColorBrush Opacity="0" Color="White"/>
-            </Button.Background>
-        </Button>
+
+       
     </Grid>
 </UserControl>
