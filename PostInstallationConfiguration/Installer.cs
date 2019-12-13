@@ -48,7 +48,7 @@ namespace PostInstallationConfiguration
         public void RemoveShortcut()
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string shortcutFullPath = desktopPath + "/" + "SmurfWalletOW.lnk";
+            string shortcutFullPath = desktopPath + "/" + "Smurf Wallet OW.url";
             if (File.Exists(shortcutFullPath))
             {
                 File.Delete(shortcutFullPath);
@@ -59,7 +59,7 @@ namespace PostInstallationConfiguration
         private void AddShortcutToDesktop(string linkName)
         {
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            using (StreamWriter writer = new StreamWriter(deskDir + "\\" + linkName + ".lnk"))
+            using (StreamWriter writer = new StreamWriter(deskDir + "\\" + linkName + ".url"))
             {
                 string app = this.Context.Parameters["targetDir"] + "\\SmurfWalletOW.exe";
                 string icon = this.Context.Parameters["targetDir"] + "\\Icons\\wallet.ico";

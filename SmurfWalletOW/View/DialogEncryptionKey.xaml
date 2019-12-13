@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Encryption Key"/>
         <PasswordBox Grid.Row="1" Grid.ColumnSpan="2" Name="masterKey" />
-        <Button Grid.Row="2"  Content="Set" Command="{Binding SetCommand}"  Style="{StaticResource OrangeButton}" >
+        <Button Grid.Row="2"  Content="Play" Command="{Binding SetCommand}"  Style="{StaticResource OrangeButton}" >
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource MultiValueConverter}">
                     <Binding ElementName="masterKey"/>
