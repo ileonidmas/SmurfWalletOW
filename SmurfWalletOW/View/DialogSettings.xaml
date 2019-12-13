@@ -6,7 +6,9 @@
              xmlns:behaviors="clr-namespace:SmurfWalletOW.Behavior"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{Binding DialogSettingsViewModel, Source={StaticResource Locator}}">
+             d:DataContext="{Binding DialogSettingsViewModel, Source={StaticResource Locator}}"
+              Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.08' }" 
+             Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource RatioConverter}, ConverterParameter='0.25' }" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -17,17 +19,16 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Content="Overwatch path"/>
 
-        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Settings.OverwatchPath}" Margin="10" IsReadOnly="True"  behaviors:DoubleClickBehavior.Command="{Binding UpdateOverwatchCommand}" />
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Settings.OverwatchPath}" Margin="1" IsReadOnly="True"  behaviors:DoubleClickBehavior.Command="{Binding UpdateOverwatchCommand}" />
 
         <!--<Button Grid.Row="0"  Grid.Column="2"  Content="Set" Command="{Binding UpdateOverwatchCommand}" />-->
          <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Loading time (seconds)"/>
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.LoadingTime}" Margin="10" TextAlignment="Center" />
-        <Button Grid.Row="5"  Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-        <Button Grid.Row="5" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.LoadingTime}" Margin="1" TextAlignment="Center" />
+        <Button Grid.Row="5"  Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Style="{StaticResource OrangeButton}" />
+        <Button Grid.Row="5" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Style="{StaticResource OrangeButton}" />
 
 
     </Grid>

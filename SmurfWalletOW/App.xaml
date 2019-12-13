@@ -8,16 +8,8 @@
     <Application.Resources>
         <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converter:MultiValueConverter x:Key="MultiValueConverter"/>
+        <converter:RatioConverter x:Key="RatioConverter"/>
         <vm:ViewModelLocator x:Key="Locator"/>
-
-        <!--<ResourceDictionary x:Key="resources">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/SmurfWalletOW;component/Resources/Colors.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/SmurfWalletOW;component/Resources/Templates.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/SmurfWalletOW;component/Resources/Converters.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>-->
-
 
         <SolidColorBrush x:Key="OverwatchWhiteColor">#ffffff</SolidColorBrush>
         <SolidColorBrush x:Key="OverwatchOrangeColor">#ffc168</SolidColorBrush>
@@ -36,7 +28,56 @@
         <DataTemplate DataType="{x:Type vm:DialogSettingsViewModel}">
             <v:DialogSettings/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DialogAboutViewModel}">
+            <v:DialogAboutView/>
+        </DataTemplate>
 
+        <Style x:Key="OrangeButton" TargetType="Button">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground"  Value="{StaticResource OverwatchWhiteColor}" />
+            <Setter Property="Background" Value="{StaticResource OverwatchOrangeColor}" />
+        </Style>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="14px"/>
+            <Setter Property="Height" Value="21px"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+        </Style>
+        
+        <Style x:Key="BlackLabel" TargetType="Label">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="21px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+        </Style>
+        
+        
+        <Style x:Key="BlackLabelLittle" TargetType="Label">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+        </Style>
+        
+        <Style x:Key="BlackCheckboxLittle" TargetType="CheckBox">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="14px"/>
+            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+            <Setter Property="VerticalContentAlignment"  Value="Center" />
+        </Style>
         <ResourceDictionary x:Key="MahApps">
             <ResourceDictionary.MergedDictionaries>
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->

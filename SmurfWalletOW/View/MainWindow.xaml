@@ -14,20 +14,21 @@
         TitleForeground="{StaticResource OverwatchWhiteColor}"
         WindowTitleBrush="{StaticResource OverwatchOrangeColor}"
         BorderBrush="{StaticResource OverwatchBlackColor}"
-        Height="500"
-        Width="300"
-    
+
+        Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.5' }" 
+        Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource RatioConverter}, ConverterParameter='0.2' }" 
+      
         ShowMinButton="False"
         ShowMaxRestoreButton="False"
         ResizeMode="NoResize"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands Background="Black">
-            <Button Content="settings" Command="{Binding OpenSettingsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  >
-                <Button.Background>
-                    <SolidColorBrush Opacity="0" Color="White"/>
-                </Button.Background>
+            <Button Content="About" Foreground="{StaticResource OverwatchWhiteColor}"  Command="{Binding OpenAboutCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+            <Button  Command="{Binding OpenSettingsCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" >
+                <iconPacks:PackIconModern Kind="Settings" Foreground="{StaticResource OverwatchWhiteColor}" />
             </Button>
+
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
    

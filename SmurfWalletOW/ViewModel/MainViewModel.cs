@@ -4,6 +4,7 @@ using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,13 @@ namespace SmurfWalletOW.ViewModel
             get => _openSettingsCommand;
             set => Set(ref _openSettingsCommand, value);
         }
+
+        private RelayCommand<object> _openAboutCommand;
+        public RelayCommand<object> OpenAboutCommand
+        {
+            get => _openAboutCommand;
+            set => Set(ref _openAboutCommand, value);
+        }
         public RelayCommand LoadCommand
         {
             get => _loadCommand;
@@ -41,9 +49,12 @@ namespace SmurfWalletOW.ViewModel
             _dialogService = dialogService;
             _fileService = fileService;
             _openSettingsCommand = new RelayCommand<object>((parameter) => OpenSettings(parameter));
+            _openAboutCommand = new RelayCommand<object>((parameter) => OpenAbout(parameter));
             _loadCommand = new RelayCommand(Load);
+
         }
 
+        
         private async void OpenSettings(object parameter)
         {
             DialogResult result = _dialogService.ShowDialogSettings(Settings, parameter as Window);
@@ -53,6 +64,11 @@ namespace SmurfWalletOW.ViewModel
             }
             //load it in case model was changed
             Settings = await _fileService.GetSettingsAsync();
+        }
+
+        private async void OpenAbout(object parameter)
+        {
+            DialogResult result = _dialogService.ShowDialogAbout( parameter as Window);
         }
 
         private async void Load()

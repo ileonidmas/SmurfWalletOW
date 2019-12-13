@@ -9,33 +9,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300"
              DataContext="{Binding AccountListViewModel, Source={StaticResource Locator}}">
-    <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}" >
-        
-        <Button Command="{Binding AddAccountCommand}" Width="24" Height="24" HorizontalAlignment="Right" VerticalAlignment="Bottom" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" >
-            <iconPacks:PackIconModern Width="24" Height="24" Kind="Add" />
-            <Button.Background>
-                <SolidColorBrush Opacity="0" Color="White"/>
-            </Button.Background>
+    <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Button Command="{Binding AddAccountCommand}" BorderThickness="0" Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" >
+            <iconPacks:PackIconModern Kind="Add" Foreground="{StaticResource OverwatchWhiteColor}" />
         </Button>
-        
-        <ItemsControl Grid.Row="0"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AccountList}" >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <view:AccountItemView Width="100"   Height="50"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="ContentPresenter">
-                    <Setter Property="Margin" Value="20"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-        </ItemsControl>
+        <ScrollViewer Grid.Row="1" Name="parentElementName"  VerticalScrollBarVisibility="Hidden">
+            <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ItemsSource="{Binding AccountList}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-       
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <view:AccountItemView Width="{Binding ActualWidth, ElementName=parentElementName, Converter={StaticResource RatioConverter}, ConverterParameter='0.5'}" Height="{Binding ActualHeight, ElementName=parentElementName, Converter={StaticResource RatioConverter}, ConverterParameter='0.2'}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

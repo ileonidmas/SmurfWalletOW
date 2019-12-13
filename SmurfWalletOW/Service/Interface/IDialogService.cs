@@ -17,5 +17,6 @@ namespace SmurfWalletOW.Service.Interface
         DialogResult ShowDialogAccount(Account account, Window owner);
         DialogResult ShowDialogEncryptionkey(SecureString key,Window owner);
         DialogResult ShowDialogSettings(Settings settings, Window owner);
+        DialogResult ShowDialogAbout( Window owner);
     }
 }

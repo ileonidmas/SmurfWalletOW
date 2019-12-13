@@ -339,6 +339,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_58932E5004E4930FAA44D52D032CAB40"
+        "OwnerKey" = "8:_820B4FD3486A4D8BB58E1444346C7888"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5C7B3856C0614FD9368D356364B7930A"
         "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
         "MsmSig" = "8:_UNDEFINED"
@@ -443,6 +449,12 @@
         {
         "MsmKey" = "8:_80D7DD54159261851C51DE86B440C068"
         "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_820B4FD3486A4D8BB58E1444346C7888"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -916,13 +928,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8E2F11145044EF3B4278060575334C35"
+        "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
+        "OwnerKey" = "8:_820B4FD3486A4D8BB58E1444346C7888"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1699,6 +1711,12 @@
         "OwnerKey" = "8:_A2DCD9DEDB2FD47C242E17C66D3DF442"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8E2F11145044EF3B4278060575334C35"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1717,6 +1735,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -1733,12 +1767,62 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_648C268B1CA14BFD9DCEC6344D203F15"
+            {
+            "Name" = "8:PostCommit"
+            "Condition" = "8:"
+            "Object" = "8:_820B4FD3486A4D8BB58E1444346C7888"
+            "FileType" = "3:1"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_7F965994_B522_4424_92BA_C957A536D834"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targetDir=\"[TARGETDIR]\\\""
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_B8D70EABD8F4400A861C29E7B9E5319E"
+            {
+            "Name" = "8:PostInstall"
+            "Condition" = "8:"
+            "Object" = "8:_820B4FD3486A4D8BB58E1444346C7888"
+            "FileType" = "3:1"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_FCFE7B34_0957_48E7_BD2A_01E50A36DFF4"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targetDir=\"[TARGETDIR]\\\""
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_C7F932D5B35448A895D1127B25566F90"
+            {
+            "Name" = "8:PostUninstall"
+            "Condition" = "8:"
+            "Object" = "8:_820B4FD3486A4D8BB58E1444346C7888"
+            "FileType" = "3:1"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_4C519C1D_A671_4937_9763_EFE5C1A77FBC"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targetDir=\"[TARGETDIR]\\\""
+            }
         }
         "DefaultFeature"
         {
@@ -5911,7 +5995,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SmurfWalletOW"
         "ProductCode" = "8:{90399669-FF3A-4ED0-B25F-E1AE705E03E6}"
-        "PackageCode" = "8:{E73A9F54-FB76-44FB-B197-8BB7BFC133DF}"
+        "PackageCode" = "8:{1F1196E5-5F62-475B-9F01-EA4EC4B55C2C}"
         "UpgradeCode" = "8:{B4381B83-38C2-44D4-8338-9CD9F90F36C2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -6031,20 +6115,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_942F1154BBBA48E4B1DA404B6E464AE7"
-            {
-            "Name" = "8:SmurfWalletOW"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:32512"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_8044A10079484517A045AEE1B7547638"
-            "Folder" = "8:_061D526613474692B14CE5721E482B11"
-            "WorkingFolder" = "8:_B479D868F9A34008B357D5D481DAA047"
-            "Icon" = "8:_8044A10079484517A045AEE1B7547638"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {
@@ -6495,6 +6565,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{F052FD33-CEBD-4244-B7C8-299F57117D01}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_820B4FD3486A4D8BB58E1444346C7888"
+            {
+            "SourcePath" = "8:..\\PostInstallationConfiguration\\obj\\Debug\\PostInstallationConfiguration.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_B479D868F9A34008B357D5D481DAA047"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{54AC4108-609D-40B3-9DD4-438144785F81}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

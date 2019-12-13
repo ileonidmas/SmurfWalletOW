@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Width="180"
-             Height="75"
+             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.08' }" 
+             Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource RatioConverter}, ConverterParameter='0.25' }" 
              d:DataContext="{Binding DialogEncryptionKeyViewModel, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Encryption Key"/>
         <PasswordBox Grid.Row="1" Grid.ColumnSpan="2" Name="masterKey" />
-        <Button Grid.Row="2"  Content="Set" Command="{Binding SetCommand}" >
+        <Button Grid.Row="2"  Content="Set" Command="{Binding SetCommand}"  Style="{StaticResource OrangeButton}" >
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource MultiValueConverter}">
                     <Binding ElementName="masterKey"/>
@@ -28,6 +28,6 @@
                 </MultiBinding>
             </Button.CommandParameter>
         </Button>
-        <Button Grid.Row="2" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+        <Button Grid.Row="2" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Style="{StaticResource OrangeButton}"  />
     </Grid>
 </UserControl>

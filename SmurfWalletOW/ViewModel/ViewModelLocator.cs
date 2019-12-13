@@ -68,6 +68,10 @@ namespace SmurfWalletOW.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DialogEncryptionKeyViewModel>(); }
         }
+        public DialogAboutViewModel DialogAboutViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<DialogAboutViewModel>(); }
+        }
 
     }
 }

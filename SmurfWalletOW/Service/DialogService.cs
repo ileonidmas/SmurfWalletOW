@@ -45,6 +45,12 @@ namespace SmurfWalletOW.Service
             return ShowDialog(vm, owner);
         }
 
+        public DialogResult ShowDialogAbout(Window owner)
+        {
+            DialogAboutViewModel vm = new DialogAboutViewModel();
+            return ShowDialog(vm, owner);
+        }
+
         private DialogResult ShowDialog(DialogViewModelBase vm, Window owner)
         {
             DialogWindow win = new DialogWindow();

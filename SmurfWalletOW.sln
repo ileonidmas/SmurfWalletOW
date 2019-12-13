@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmurfWalletOW", "SmurfWalle
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SmurfWalletOWInstaller", "SmurfWalletOWInstaller\SmurfWalletOWInstaller.vdproj", "{1112B441-E0FF-4D7D-A07E-02C4FD71F844}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostInstallationConfiguration", "PostInstallationConfiguration\PostInstallationConfiguration.csproj", "{54AC4108-609D-40B3-9DD4-438144785F81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Debug|Any CPU.ActiveCfg = Debug
 		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Release|Any CPU.ActiveCfg = Release
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
