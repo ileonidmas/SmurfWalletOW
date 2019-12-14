@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SmurfWalletOW.Resources">
+
+    <SolidColorBrush x:Key="OverwatchWhiteColor">#ffffff</SolidColorBrush>
+    <SolidColorBrush x:Key="OverwatchOrangeColor">#ffc168</SolidColorBrush>
+    <SolidColorBrush x:Key="OverwatchGreyColor">#878787</SolidColorBrush>
+    <SolidColorBrush x:Key="OverwatchBlackColor">#000000</SolidColorBrush>
+    <SolidColorBrush x:Key="MyBrush" Color="Gold"/>
+</ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,7 @@ namespace PostInstallationConfiguration
         {
             base.Commit(savedState);
             //change link
-            AddShortcutToDesktop("Smurf Wallet OW");
+            AddShortcutToDesktop();
         }
 
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand)]
@@ -40,7 +41,7 @@ namespace PostInstallationConfiguration
         {
             base.Uninstall(savedState);
             //delete shortcut
-            //RemoveShortcut();
+            RemoveShortcut();
         }
 
         //private
@@ -48,24 +49,30 @@ namespace PostInstallationConfiguration
         public void RemoveShortcut()
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string shortcutFullPath = desktopPath + "/" + "Smurf Wallet OW.url";
+            string shortcutFullPath = desktopPath + "\\SmurfWalletOW.url";
             if (File.Exists(shortcutFullPath))
             {
                 File.Delete(shortcutFullPath);
             }
         }
 
-
-        private void AddShortcutToDesktop(string linkName)
+        private void CreateIcon()
         {
-            string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            using (StreamWriter writer = new StreamWriter(deskDir + "\\" + linkName + ".url"))
+
+        }
+        private void AddShortcutToDesktop()
+        {
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            var targetPath = this.Context.Parameters["targetDir"];
+            string app = targetPath + "SmurfWalletOW.exe";
+            string icon = targetPath + "Icons\\wallet.ico";
+            app = app.Replace("/", "\\");
+            icon = icon.Replace("/", "\\");
+            using (StreamWriter writer = new StreamWriter(desktopPath + "\\SmurfWalletOW.url"))
             {
-                string app = this.Context.Parameters["targetDir"] + "\\SmurfWalletOW.exe";
-                string icon = this.Context.Parameters["targetDir"] + "\\Icons\\wallet.ico";
+                writer.WriteLine("[InternetShortcut]");
                 writer.WriteLine("URL=file:///" + app);
                 writer.WriteLine("IconIndex=0");
-                icon = icon.Replace('\\', '/');
                 writer.WriteLine("IconFile=" + icon);
                 writer.Flush();
             }

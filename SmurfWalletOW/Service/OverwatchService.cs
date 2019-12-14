@@ -58,7 +58,7 @@ namespace SmurfWalletOW.Service
             var wh = app.MainWindowHandle;
             SetForegroundWindow(wh);
 
-            Thread.Sleep(loadingTime);
+            Thread.Sleep(Convert.ToInt32(Math.Round(loadingTime)));
             SendKeys.SendWait(account.Email);
             Thread.Sleep(750);
             SendKeys.SendWait("{TAB}");
