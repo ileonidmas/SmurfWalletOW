@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -73,6 +74,10 @@ namespace SmurfWalletOW.Service
                 {
                     SendKeys.SendWait(Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)).ToString());
                 }
+            }
+            catch(CryptographicException ex)
+            {
+                //notify that master password was wrong
             }
             finally
             {

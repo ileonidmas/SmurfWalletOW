@@ -47,7 +47,7 @@ namespace SmurfWalletOW.Service
 
         private List<Account> GetAccountList()
         {
-            string walletPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.AccountsPath).Result;
+            string walletPath = GetApplicationFilesPath() + "\\" + _appSettingsService.GetKeyAsync(AppSettingsKeys.AccountsPath).Result;
 
             if (!File.Exists(walletPath))
                 return new List<Account>();
@@ -58,7 +58,7 @@ namespace SmurfWalletOW.Service
 
         private bool SaveAccountList(List<Account> list)
         {
-            string walletPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.AccountsPath).Result;
+            string walletPath = GetApplicationFilesPath() + "\\" + _appSettingsService.GetKeyAsync(AppSettingsKeys.AccountsPath).Result;
             var output = JsonConvert.SerializeObject(list);
             File.WriteAllText(walletPath, output);
             return true;
@@ -80,7 +80,7 @@ namespace SmurfWalletOW.Service
 
         private Settings GetSettings()
         {
-            string settingsPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.SettingsPath).Result;
+            string settingsPath = GetApplicationFilesPath() + "\\" + _appSettingsService.GetKeyAsync(AppSettingsKeys.SettingsPath).Result;
             Settings settings;
             if (!File.Exists(settingsPath))
             {
@@ -95,7 +95,7 @@ namespace SmurfWalletOW.Service
 
         private bool SaveSettings(Settings settings)
         {
-            string settingsPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.SettingsPath).Result;
+            string settingsPath = GetApplicationFilesPath() + "\\" + _appSettingsService.GetKeyAsync(AppSettingsKeys.SettingsPath).Result;
             var output = JsonConvert.SerializeObject(settings);
             File.WriteAllText(settingsPath, output);
             return true;
@@ -107,6 +107,17 @@ namespace SmurfWalletOW.Service
             settings.OverwatchPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultOverwatchPath).Result;
             settings.LoadingTime = Convert.ToInt32(_appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultLoadingTime).Result);
             return settings;
+        }
+
+        private string GetApplicationFilesPath()
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + _appSettingsService.GetKeyAsync(AppSettingsKeys.ApplicationFilesPath).Result;
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
         }
 
     }

@@ -12,5 +12,6 @@ namespace SmurfWalletOW.Enums
         public const string SettingsPath = "SettingsPath";
         public const string AccountsPath = "AccountsPath";
         public const string DefaultLoadingTime = "DefaultLoadingTime";
+        public const string ApplicationFilesPath = "ApplicationFilesPath";
     }
 }
