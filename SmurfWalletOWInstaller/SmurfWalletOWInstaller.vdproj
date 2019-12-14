@@ -3380,7 +3380,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SmurfWalletOW"
         "ProductCode" = "8:{134DE908-D284-45C2-ADE6-F698D3DE75DC}"
-        "PackageCode" = "8:{3C1B118A-28BB-4242-A21D-6EFFB1E29B85}"
+        "PackageCode" = "8:{F88AE0C7-41C8-44EE-A15A-3183B6253A75}"
         "UpgradeCode" = "8:{B4381B83-38C2-44D4-8338-9CD9F90F36C2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -3403,7 +3403,7 @@
         "UseSystemSearchPath" = "11:TRUE"
         "TargetPlatform" = "3:0"
         "PreBuildEvent" = "8:"
-        "PostBuildEvent" = "8:"
+        "PostBuildEvent" = "8:e"
         "RunPostBuildEvent" = "3:0"
         }
         "Registry"
@@ -3979,7 +3979,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8044A10079484517A045AEE1B7547638"
             {
-            "SourcePath" = "8:..\\SmurfWalletOW\\obj\\Debug\\SmurfWalletOW.exe"
+            "SourcePath" = "8:..\\SmurfWalletOW\\obj\\Release\\SmurfWalletOW.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B479D868F9A34008B357D5D481DAA047"
@@ -4007,7 +4007,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_820B4FD3486A4D8BB58E1444346C7888"
             {
-            "SourcePath" = "8:..\\PostInstallationConfiguration\\obj\\Debug\\PostInstallationConfiguration.dll"
+            "SourcePath" = "8:..\\PostInstallationConfiguration\\obj\\Release\\PostInstallationConfiguration.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B479D868F9A34008B357D5D481DAA047"
