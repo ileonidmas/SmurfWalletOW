@@ -30,7 +30,7 @@
         <TextBox Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Account.Email}"    />
         <Label Grid.Row="4" Grid.ColumnSpan="2" Content="Password" HorizontalAlignment="Left"/>
         <PasswordBox Grid.Row="5" Grid.ColumnSpan="2" Name="password"  />
-        <CheckBox Grid.Row="6" Grid.ColumnSpan="2" Content="Manual Encription" IsChecked="{Binding Account.ManualEncryption}"   />
+        <CheckBox Grid.Row="6" Grid.ColumnSpan="2" Content="Manual Encryption" IsChecked="{Binding Account.ManualEncryption}"   />
         <Label Grid.Row="7" Grid.ColumnSpan="2" Content="Encryption Key" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
         <PasswordBox Grid.Row="8" Grid.ColumnSpan="2" Name="masterKey" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
         <Button Grid.Row="9"  Content="Set" Command="{Binding SetCommand}" Style="{StaticResource OrangeButton}">
