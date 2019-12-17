@@ -1,6 +1,8 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using SmurfWalletOW.Factory;
+using SmurfWalletOW.Factory.Interface;
 using SmurfWalletOW.Service;
 using SmurfWalletOW.Service.Interface;
 using System;
@@ -33,45 +35,45 @@ namespace SmurfWalletOW.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountListViewModel>();
 
-            SimpleIoc.Default.Register<DialogYesNoViewModel>();
-            SimpleIoc.Default.Register<DialogEncryptionKeyViewModel>();
-            SimpleIoc.Default.Register<DialogSettingsViewModel>();
-            SimpleIoc.Default.Register<DialogAccountViewModel>();
+
+
+            SimpleIoc.Default.Register<IDialogFactory, DialogFactory>();
         }
 
         public MainViewModel MainViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<MainViewModel>(); }
         }
 
         public AccountListViewModel AccountListViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<AccountListViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<AccountListViewModel>(); }
         }
         
         public DialogYesNoViewModel DialogYesNoViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<DialogYesNoViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<DialogYesNoViewModel>(); }
         }
 
         public DialogAccountViewModel DialogAccountViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<DialogAccountViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<DialogAccountViewModel>(); }
         }
 
         public DialogSettingsViewModel DialogSettingsViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<DialogSettingsViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<DialogSettingsViewModel>(); }
         }
 
         public DialogEncryptionKeyViewModel DialogEncryptionKeyViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<DialogEncryptionKeyViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<DialogEncryptionKeyViewModel>(); }
         }
         public DialogAboutViewModel DialogAboutViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<DialogAboutViewModel>(); }
+            get { return SimpleIoc.Default.GetInstance<DialogAboutViewModel>(); }
         }
+
 
     }
 }

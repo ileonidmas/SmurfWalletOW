@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SmurfWalletOW.Enums;
+using SmurfWalletOW.Message;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using SmurfWalletOW.View;
@@ -66,9 +68,10 @@ namespace SmurfWalletOW.ViewModel
             _deleteAccountCommand = new RelayCommand<object[]>((parameters) => DeleteAccount(parameters));
             _playCommand = new RelayCommand<object[]>((parameters) => Play(parameters));
             _loadCommand = new RelayCommand(Load);
+
+            MessengerInstance.Register<SaveAccountMessage>(this, SaveAccount);
+            MessengerInstance.Register<SetEncryptionMessage>(this, SetEncryption);
         }
-
-
 
         private async void Load()
         {
@@ -79,28 +82,27 @@ namespace SmurfWalletOW.ViewModel
             }
         }
 
-        private async void AddAccount(object parameter)
+        private void AddAccount(object parameter)
         {
-            var account = new Account();
+            _dialogService.ShowDialog(DialogsEnum.DialogAccountView,parameter as Window);
+        }
 
-            DialogResult result = _dialogService.ShowDialogAccount(account, parameter as Window);
-            if (result == DialogResult.Yes)
+        private async void SaveAccount(SaveAccountMessage message)
+        {
+            if (await _fileService.AddAccountAsync(message.Account))
             {
-                if (await _fileService.AddAccountAsync(account)) { 
-                    AccountList.Add(account);
-                }
-                else
-                {
-                    //failed to save
-                }
+                AccountList.Add(message.Account);
             }
-
+            else
+            {
+                //failed to save
+            }
         }
 
         private async void DeleteAccount(object[] parameters)
         {
             var account = parameters[0] as Account;
-            DialogResult result = _dialogService.ShowDialogYesNo("Are you sure you want to delete this entry?", parameters[1] as Window);
+            DialogResult result = _dialogService.ShowDialog(DialogsEnum.DialogYesNo, parameters[1] as Window);
             if (result == DialogResult.Yes)
             {
                 if (await _fileService.DeleteAccountAsync(account))
@@ -112,27 +114,27 @@ namespace SmurfWalletOW.ViewModel
                     //failed to delete
                 }
             }
-           
-           
         }
 
         private async void Play(object[] parameters)
         {
             var account = parameters[0] as Account;
-            SecureString key= new SecureString();
             if (account.ManualEncryption)
             {
-                DialogResult result = _dialogService.ShowDialogEncryptionkey(key, parameters[1] as Window);
-                if(result == DialogResult.Yes)
-                {
-                    await _overwatchService.StartGameAsync(key, account);
-                }
+                _selectedAccount = account;
+                DialogResult result = _dialogService.ShowDialog(DialogsEnum.DialogEncryptionKey, parameters[1] as Window);                
             }
             else
             {
-                await _overwatchService.StartGameAsync(key, account);
+                await _overwatchService.StartGameAsync(null, account);
             }
 
+        }
+        private Account _selectedAccount;
+
+        private async void SetEncryption(SetEncryptionMessage message)
+        {
+            await _overwatchService.StartGameAsync(message.Key, _selectedAccount);
         }
     }
    

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SmurfWalletOW.Enums
 {
-    public enum Dialogs
+    public enum DialogsEnum
     {
-        DialogSettings,
-        DialogYesNo,
+        DialogsAbout,
+        DialogAccountView,
         DialogEncryptionKey,
-        DialogAccountView
+        DialogSettings,
+        DialogYesNo
     }
 }

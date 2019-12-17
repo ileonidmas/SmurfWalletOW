@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SmurfWalletOW.Enums;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using System;
@@ -17,14 +18,6 @@ namespace SmurfWalletOW.ViewModel
     {
 
         private readonly IDialogService _dialogService;
-        private readonly IFileService _fileService;
-        private RelayCommand _loadCommand;
-        private Settings _settings;
-        public Settings Settings
-        {
-            get => _settings;
-            set => Set(ref _settings, value);
-        }
 
         private RelayCommand<object> _openSettingsCommand;
         public RelayCommand<object> OpenSettingsCommand
@@ -39,41 +32,26 @@ namespace SmurfWalletOW.ViewModel
             get => _openAboutCommand;
             set => Set(ref _openAboutCommand, value);
         }
-        public RelayCommand LoadCommand
-        {
-            get => _loadCommand;
-            set => Set(ref _loadCommand, value);
-        }
-        public MainViewModel(IDialogService dialogService, IFileService fileService)
+
+        public MainViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService;
-            _fileService = fileService;
             _openSettingsCommand = new RelayCommand<object>((parameter) => OpenSettings(parameter));
             _openAboutCommand = new RelayCommand<object>((parameter) => OpenAbout(parameter));
-            _loadCommand = new RelayCommand(Load);
 
         }
 
-        
-        private async void OpenSettings(object parameter)
+        private void OpenSettings(object parameter)
         {
-            DialogResult result = _dialogService.ShowDialogSettings(Settings, parameter as Window);
-            if (result == DialogResult.Yes)
-            {
-                await _fileService.SaveSettingsAsync(Settings);
-            }
-            //load it in case model was changed
-            Settings = await _fileService.GetSettingsAsync();
+            _dialogService.ShowDialog(DialogsEnum.DialogSettings, parameter as Window);
         }
 
-        private async void OpenAbout(object parameter)
+
+        private void OpenAbout(object parameter)
         {
-            DialogResult result = _dialogService.ShowDialogAbout( parameter as Window);
+            _dialogService.ShowDialog(DialogsEnum.DialogsAbout, parameter as Window);
         }
 
-        private async void Load()
-        {
-            Settings = await _fileService.GetSettingsAsync();
-        }
+      
     }
 }

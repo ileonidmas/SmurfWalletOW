@@ -17,6 +17,7 @@ namespace SmurfWalletOW.Service.Interface
 
         Task<Settings> GetSettingsAsync();
         Task<bool> SaveSettingsAsync(Settings settings);
+        Task<bool> SetOverwatchSettingsToWindowedAsync();
 
     }
 }

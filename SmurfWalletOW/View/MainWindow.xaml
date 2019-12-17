@@ -33,7 +33,7 @@
     </controls:MetroWindow.RightWindowCommands>
    
 
-    <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}">
+    <Grid>
         <view:AccountListView />
     </Grid>
 </controls:MetroWindow>

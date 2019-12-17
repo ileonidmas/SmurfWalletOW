@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using SmurfWalletOW.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,6 @@ namespace SmurfWalletOW.ViewModel
         private RelayCommand<object[]> _setCommand;
 
         private RelayCommand<Window> _cancelCommand;
-        public SecureString Key
-        {
-            get => _key;
-            set => Set(ref _key, value);
-        }
         public RelayCommand<object[]> SetCommand
         {
             get => _setCommand;
@@ -36,25 +32,17 @@ namespace SmurfWalletOW.ViewModel
             set => Set(ref _cancelCommand, value);
         }
 
-        public DialogEncryptionKeyViewModel(SecureString key)
+        public DialogEncryptionKeyViewModel()
         {
             Title = "Encryption key";
             _setCommand = new RelayCommand<object[]>((w) => OnSetClicked(w));
             _cancelCommand = new RelayCommand<Window>((w) => OnCancelClicked(w));
-            _key = key;
         }
 
         private void OnSetClicked(object[] parameters)
         {
             var master = (parameters[0] as PasswordBox).SecurePassword;
-            var valuePtr = Marshal.SecureStringToGlobalAllocUnicode(master);
-
-            for (int i = 0; i < master.Length; i++)
-            {
-               Key.AppendChar(Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)));
-            }
-
-
+            MessengerInstance.Send(new SetEncryptionMessage(master));
             this.CloseDialogWithResult(parameters[1] as Window, DialogResult.Yes);
         }
 

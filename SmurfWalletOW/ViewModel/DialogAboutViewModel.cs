@@ -10,7 +10,6 @@ namespace SmurfWalletOW.ViewModel
 {
     public class DialogAboutViewModel : DialogViewModelBase
     {
-
         private RelayCommand<Uri> _redirectCommand;
 
         public RelayCommand<Uri> RedirectCommand

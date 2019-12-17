@@ -31,10 +31,10 @@ namespace SmurfWalletOW.ViewModel
             set { noCommand = value; }
         }
 
-        public DialogYesNoViewModel(string message) 
+        public DialogYesNoViewModel() 
         {
             Title = "Message";
-            Message = message;
+            Message = "Are you sure you want to delete this entry?";
 
             this.yesCommand = new RelayCommand<Window>((w) => OnYesClicked(w));
             this.noCommand = new RelayCommand<Window>((w) => OnNoClicked(w));

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using SmurfWalletOW.Message;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using System;
@@ -42,18 +43,35 @@ namespace SmurfWalletOW.ViewModel
             set { _cancelCommand = value; }
         }
 
-        public DialogAccountViewModel(Account account)
+        private RelayCommand _loadCommand;
+        public RelayCommand LoadCommand
+        {
+            get { return _loadCommand; }
+            set { _loadCommand = value; }
+        }
+
+        public DialogAccountViewModel()
         {
             Title = "Account";
-            Account = account;
+
             _encryptionService = SimpleIoc.Default.GetInstance<IEncryptionService>();
             _setCommand = new RelayCommand<object[]>((w) => OnSetClicked(w));
             _cancelCommand = new RelayCommand<Window>((w) => OnCancelClicked(w));
+
+            _loadCommand = new RelayCommand(Load);
         }
-        
+        private async void Load()
+        {
+            Account = new Account();
+        }
+
+
         private void OnSetClicked(object[] parameters)
         {            
-            Account.Password = _encryptionService.EncryptString((parameters[0] as PasswordBox).SecurePassword, (parameters[1] as PasswordBox).SecurePassword, Account.ManualEncryption);            
+            Account.Password = _encryptionService.EncryptString((parameters[0] as PasswordBox).SecurePassword, (parameters[1] as PasswordBox).SecurePassword, Account.ManualEncryption);
+
+            MessengerInstance.Send(new SaveAccountMessage(Account));
+
             this.CloseDialogWithResult(parameters[2] as Window, DialogResult.Yes);
         }
 

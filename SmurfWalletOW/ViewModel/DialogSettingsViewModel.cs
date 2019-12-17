@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SmurfWalletOW.Message;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using System;
@@ -14,8 +15,11 @@ namespace SmurfWalletOW.ViewModel
 {
     public class DialogSettingsViewModel : DialogViewModelBase
     {
+
+        private readonly IFileService _fileService;
+
+
         private Settings _settings;
-        private RelayCommand _loadCommand;
         private RelayCommand _updateOverwatchPathCommand;
 
         public Settings Settings
@@ -38,34 +42,47 @@ namespace SmurfWalletOW.ViewModel
             set { _cancelCommand = value; }
         }
 
+        private RelayCommand _loadCommand;
+        public RelayCommand LoadCommand
+        {
+            get { return _loadCommand; }
+            set { _loadCommand = value; }
+        }
+
         public RelayCommand UpdateOverwatchCommand
         {
             get => _updateOverwatchPathCommand;
             set => Set(ref _updateOverwatchPathCommand, value);
         }
 
-        public DialogSettingsViewModel(Settings settings)
+        public DialogSettingsViewModel(IFileService fileService)
         {
             Title = "Settings";
+            _fileService = fileService;
 
-            _settings = settings;
             _updateOverwatchPathCommand = new RelayCommand(UpdateOverwatchPath);
             _saveCommand = new RelayCommand<Window>((parameter)=>SaveSettings(parameter));
-            _cancelCommand = new RelayCommand<Window>((parameter) => Cancel(parameter));
+            _cancelCommand = new RelayCommand<Window>((parameter) => Cancel(parameter)); 
+            _loadCommand = new RelayCommand(Load);
         }
 
         private async void SaveSettings(object parameter)
         {
-            this.CloseDialogWithResult(parameter as Window, Enums.DialogResults.DialogResult.Yes);
+            await _fileService.SaveSettingsAsync(Settings);
+            CloseDialogWithResult(parameter as Window, Enums.DialogResults.DialogResult.Yes);
         }
         private void Cancel(Window parameter)
         {
-            this.CloseDialogWithResult(parameter as Window, Enums.DialogResults.DialogResult.No);
+            CloseDialogWithResult(parameter as Window, Enums.DialogResults.DialogResult.No);
         }
 
-        
+        private async void Load()
+        {
+            Settings = await _fileService.GetSettingsAsync();
+        }
 
-        private async void UpdateOverwatchPath()
+
+        private void UpdateOverwatchPath()
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "Exe Files (.exe)|*.exe";

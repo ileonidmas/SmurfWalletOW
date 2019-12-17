@@ -2,6 +2,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using SmurfWalletOW.Enums;
+using SmurfWalletOW.Factory.Interface;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using SmurfWalletOW.View;
@@ -20,39 +21,15 @@ namespace SmurfWalletOW.Service
     public class DialogService : IDialogService
     {
 
-        public DialogResult ShowDialogYesNo(string message, Window owner)
-        {            
-            DialogViewModelBase vm = new DialogYesNoViewModel(message);
-            return ShowDialog(vm, owner);
+        private readonly IDialogFactory _dialogFactory;
+        public DialogService(IDialogFactory dialogFactory)
+        {
+            _dialogFactory = dialogFactory;
         }
 
-        public DialogResult ShowDialogAccount(Account account, Window owner)
+        public DialogResult ShowDialog(DialogsEnum dialog, Window owner)
         {
-            DialogAccountViewModel vm = new DialogAccountViewModel(account);
-            return ShowDialog(vm, owner);
-        }
-
-
-        public DialogResult ShowDialogEncryptionkey(SecureString key, Window owner)
-        {
-            DialogEncryptionKeyViewModel vm = new DialogEncryptionKeyViewModel(key);
-            return ShowDialog(vm, owner);
-        }
-
-        public DialogResult ShowDialogSettings(Settings settings, Window owner)
-        {
-            DialogSettingsViewModel vm = new DialogSettingsViewModel(settings);
-            return ShowDialog(vm, owner);
-        }
-
-        public DialogResult ShowDialogAbout(Window owner)
-        {
-            DialogAboutViewModel vm = new DialogAboutViewModel();
-            return ShowDialog(vm, owner);
-        }
-
-        private DialogResult ShowDialog(DialogViewModelBase vm, Window owner)
-        {
+            var vm = _dialogFactory.Get(dialog);
             DialogWindow win = new DialogWindow();
             if (owner != null)
                 win.Owner = owner;

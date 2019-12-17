@@ -5,6 +5,7 @@ using SmurfWalletOW.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SmurfWalletOW.Service
@@ -36,6 +37,11 @@ namespace SmurfWalletOW.Service
         public Task<bool> SaveSettingsAsync(Settings settings)
         {
             return Task.Factory.StartNew(() => SaveSettings(settings));
+        }
+
+        public Task<bool> SetOverwatchSettingsToWindowedAsync()
+        {
+            return Task.Factory.StartNew(SetOverwatchSettingsToWindowed);
         }
 
         public FileService(IAppSettingsService appSettingsService)
@@ -107,6 +113,16 @@ namespace SmurfWalletOW.Service
             settings.OverwatchPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultOverwatchPath).Result;
             settings.LoadingTime = Convert.ToInt32(_appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultLoadingTime).Result);
             return settings;
+        }
+
+        private bool SetOverwatchSettingsToWindowed()
+        {
+            var owSettings = File.ReadAllLines(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + @"Documents\Overwatch\Settings\Settings_v0.ini");
+            owSettings[20] = "FullscreenWindow = \"0\"";
+            owSettings[21] = "FullscreenWindowEnabled = \"0\"";
+            owSettings[46] = "WindowMode = \"2\"";
+            File.WriteAllLines(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + @"Documents\Overwatch\Settings\Settings_v0.ini", owSettings);
+            return true;
         }
 
         private string GetApplicationFilesPath()
