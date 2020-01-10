@@ -10,22 +10,36 @@ using namespace std;
 
 
 extern "C" {
+    typedef void(__stdcall* NotificationCallback)();
+    NotificationCallback notificationCallback = nullptr;
+    __declspec(dllexport) void  __cdecl SetNotificationCallback(NotificationCallback callback) {
+        notificationCallback = callback;
+    }
+
     __declspec(dllexport) LRESULT CALLBACK CallWndProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
         if (nCode < 0) {
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        /*if (nCode == HSHELL_REDRAW) {
+        if (nCode == HSHELL_REDRAW) {
             ofstream file;
             file.open("C:\\Users\\lema\\Desktop\\scripts\\Test.txt", ios_base::app);
             file << "Redraw was called\n"  << " \n";
             file.close();
-        }*/
-
-        ofstream file; 
+        }
+        ofstream file;
         file.open("C:\\Users\\lema\\Desktop\\scripts\\Test.txt", ios_base::app);
-        file << "NCode: " << nCode << " wParam: "  << wParam << " lParam: " << lParam << " \n";
+
+        if (notificationCallback != nullptr) {
+            notificationCallback();
+            file << "NCode: " << nCode << " wParam: " << wParam << " lParam: " << lParam << " pointer: " << notificationCallback << " \n";
+
+        }
+        else {
+            file << "NCode: " << nCode << " wParam: " << wParam << " lParam: " << lParam << " pointer: " << " null \n";
+
+        }
         file.close();
         
         return CallNextHookEx(NULL, nCode, wParam, lParam);

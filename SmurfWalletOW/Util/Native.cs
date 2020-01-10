@@ -6,6 +6,16 @@ namespace SmurfWalletOW.Util
 {
     public static class Native
     {
+        //from my dll
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void NotificationCallbackDelegate();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void SetNotificationCallbackDelegate(NotificationCallbackDelegate callback);
+
+
+
+        //from win
         public const int WH_SHELL = 10;
 
         [DllImport("USER32.DLL")]

@@ -27,16 +27,30 @@ namespace SmurfWalletOW.Service
            
         }
 
-       
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void MultiplyByTen(int numberToMultiply);
 
         public Process app;
+        private static Native.NotificationCallbackDelegate notificationCallback;
         public void Hook()
         {
             var wndHandle = app.MainWindowHandle;
             var thread_id = Native.GetWindowThreadProcessId(wndHandle, IntPtr.Zero);
             var dll = Native.LoadLibrary(@"C:\\Users\\lema\\Documents\\Github\\SmurfWalletOW\\SmurfWalletOW\\bin\\Debug\\Shell.dll");
-            var functionPtr = Native.GetProcAddress(dll, "CallWndProc");
-            whook = Native.SetWindowsHookEx(Native.WH_SHELL, functionPtr, dll, thread_id);
+            var shellCallbackPtr = Native.GetProcAddress(dll, "CallWndProc");
+            var setNotificationCallbackPtr = Native.GetProcAddress(dll, "SetNotificationCallback");
+
+            Native.SetNotificationCallbackDelegate method = (Native.SetNotificationCallbackDelegate)Marshal.GetDelegateForFunctionPointer(
+                                                                                       setNotificationCallbackPtr,
+                                                                                       typeof(Native.SetNotificationCallbackDelegate));
+            notificationCallback = () =>
+            {
+                Debug.WriteLine("yolo");
+            };
+            method(notificationCallback);
+            
+
+            whook = Native.SetWindowsHookEx(Native.WH_SHELL, shellCallbackPtr, dll, thread_id);
 
         }
 
