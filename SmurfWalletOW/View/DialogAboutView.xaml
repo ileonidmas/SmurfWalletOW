@@ -11,6 +11,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"   >           
             <Hyperlink FontSize="30" NavigateUri="https://twitter.com/imaleo_ow"  Command="{Binding RedirectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}">
@@ -27,5 +28,8 @@
                  https://github.com/ileonidmas/SmurfWalletOW
             </Hyperlink>
         </TextBlock>
+        <Label Grid.Row="3" >
+            <Label Content="{Binding AppVersion}" FontSize="30"/>
+        </Label>
     </Grid>
 </UserControl>

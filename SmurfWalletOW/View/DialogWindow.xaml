@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        d:DesignHeight="450" 
+        d:DesignHeight="600" 
         d:DesignWidth="800"
         Height="Auto" Width="Auto"                      
         Background="{StaticResource OverwatchGreyColor}"        

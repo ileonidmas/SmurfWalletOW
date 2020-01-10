@@ -28,6 +28,8 @@
             <Button  Command="{Binding OpenSettingsCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" >
                 <iconPacks:PackIconModern Kind="Settings" Foreground="{StaticResource OverwatchWhiteColor}" />
             </Button>
+            <Button Content="Hook" Foreground="{StaticResource OverwatchWhiteColor}"  Command="{Binding HookCommand}"  Style="{StaticResource CustomButtonStyle}"  />
+
 
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>

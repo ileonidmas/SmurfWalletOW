@@ -1,16 +1,12 @@
 ﻿using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
+using SmurfWalletOW.Util;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,43 +16,38 @@ namespace SmurfWalletOW.Service
     public class OverwatchService : IOverwatchService
     {
 
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetWindowRect(HandleRef hWnd, out RECT lpRect);
-
-        [DllImport("user32.dll")]
-        static extern bool MoveWindow(IntPtr handle, int x, int y, int width, int height, bool redraw);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            public int Left;        // x position of upper-left corner
-            public int Top;         // y position of upper-left corner
-            public int Right;       // x position of lower-right corner
-            public int Bottom;      // y position of lower-right corner
-
-            public Rectangle ToRectangle()
-            {
-                Rectangle rectangle = new Rectangle(Left, Top, Right - Left, Bottom - Top);
-                    return rectangle;
-            }
-        }
-
-
+        private IntPtr whook;
         private IFileService _fileService;
         private IEncryptionService _encryptionService;
+
         public OverwatchService(IEncryptionService encryptionService, IFileService fileService)
         {
             _encryptionService = encryptionService;
-            _fileService = fileService;
+            _fileService = fileService; 
+           
         }
 
-        public Task<bool> StartGameAsync(SecureString key, Account account)
+       
+
+        public Process app;
+        public void Hook()
         {
+            var wndHandle = app.MainWindowHandle;
+            var thread_id = Native.GetWindowThreadProcessId(wndHandle, IntPtr.Zero);
+            var dll = Native.LoadLibrary(@"C:\\Users\\lema\\Documents\\Github\\SmurfWalletOW\\SmurfWalletOW\\bin\\Debug\\Shell.dll");
+            var functionPtr = Native.GetProcAddress(dll, "CallWndProc");
+            whook = Native.SetWindowsHookEx(Native.WH_SHELL, functionPtr, dll, thread_id);
+
+        }
+
+        //remember to unhook on exit
+        public void UnHook()
+        {
+            Native.UnhookWindowsHookEx(whook);
+            whook = IntPtr.Zero;
+        }
+        public Task<bool> StartGameAsync(SecureString key, Account account)
+        {           
             return Task.Factory.StartNew(() => StartGame(key, account));
         }
 
@@ -64,26 +55,22 @@ namespace SmurfWalletOW.Service
         {
 
             var settingsAreSet = _fileService.SetOverwatchSettingsToWindowedAsync().Result;
-
-            var settings = _fileService.GetSettingsAsync().Result; 
-
+            var settings = _fileService.GetSettingsAsync().Result;
             var wh = StartOverwatch(settings.OverwatchPath);
-
-            var finished = InsertCredentials(wh,account,key,settings);
+            var finished = InsertCredentials(wh, account, key, settings);
 
             //maximize after done
-            SendKeys.SendWait("%{ENTER}");
+             SendKeys.SendWait("%{ENTER}");
 
             return finished;
-        }
+        }     
 
         private IntPtr StartOverwatch(string path)
         {
-            Process app = new Process();
+            app = new Process();
             app.StartInfo.FileName = path;
             app.Start();
             app.PriorityClass = ProcessPriorityClass.High;
-
 
             while (app.MainWindowTitle != "Overwatch")
             {
@@ -95,9 +82,9 @@ namespace SmurfWalletOW.Service
 
         private bool InsertCredentials(IntPtr wh,Account account,SecureString key, Settings settings)
         {
-            SetForegroundWindow(wh);
+            Native.SetForegroundWindow(wh);
 
-            MoveWindow(wh, 0, 0, 720, 436, false);
+            Native.MoveWindow(wh, 0, 0, 720, 436, false);
 
             Color theColor = Color.FromArgb(255, 209, 209, 212);
             Color pixel1, pixel2;
@@ -145,12 +132,12 @@ namespace SmurfWalletOW.Service
 
         private Bitmap GetScreenshot(IntPtr hwnd)
         {
-            RECT rect = new RECT();
+            Native.RECT rect = new Native.RECT();
 
-            if (!SetForegroundWindow(hwnd))
+            if (!Native.SetForegroundWindow(hwnd))
                 throw new Win32Exception(Marshal.GetLastWin32Error());
 
-            if (!GetWindowRect(new HandleRef(null, hwnd), out rect))
+            if (!Native.GetWindowRect(new HandleRef(null, hwnd), out rect))
                 throw new Win32Exception(Marshal.GetLastWin32Error());
 
             Thread.Sleep(500);

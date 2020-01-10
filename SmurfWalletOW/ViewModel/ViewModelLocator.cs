@@ -38,6 +38,7 @@ namespace SmurfWalletOW.ViewModel
 
 
             SimpleIoc.Default.Register<IDialogFactory, DialogFactory>();
+
         }
 
         public MainViewModel MainViewModel

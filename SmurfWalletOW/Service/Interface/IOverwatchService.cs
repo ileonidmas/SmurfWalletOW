@@ -11,5 +11,8 @@ namespace SmurfWalletOW.Service.Interface
     public interface IOverwatchService
     {
         Task<bool> StartGameAsync(SecureString key,Account account);
+
+        void Hook();
+        void UnHook();
     }
 }

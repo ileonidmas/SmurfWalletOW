@@ -9,22 +9,63 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SmurfWalletOWInstaller", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostInstallationConfiguration", "PostInstallationConfiguration\PostInstallationConfiguration.csproj", "{54AC4108-609D-40B3-9DD4-438144785F81}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shell", "Shell\Shell.vcxproj", "{74173822-8273-4374-B4FB-6A26D86391E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Debug|x64.Build.0 = Debug|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Debug|x86.Build.0 = Debug|Any CPU
 		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|x64.ActiveCfg = Release|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|x64.Build.0 = Release|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|x86.ActiveCfg = Release|Any CPU
+		{F052FD33-CEBD-4244-B7C8-299F57117D01}.Release|x86.Build.0 = Release|Any CPU
 		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Debug|Any CPU.ActiveCfg = Debug
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Debug|x64.ActiveCfg = Debug
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Debug|x64.Build.0 = Debug
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Debug|x86.ActiveCfg = Debug
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Debug|x86.Build.0 = Debug
 		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Release|Any CPU.ActiveCfg = Release
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Release|x64.ActiveCfg = Release
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Release|x64.Build.0 = Release
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Release|x86.ActiveCfg = Release
+		{1112B441-E0FF-4D7D-A07E-02C4FD71F844}.Release|x86.Build.0 = Release
 		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|x64.Build.0 = Debug|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Debug|x86.Build.0 = Debug|Any CPU
 		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|x64.ActiveCfg = Release|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|x64.Build.0 = Release|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|x86.ActiveCfg = Release|Any CPU
+		{54AC4108-609D-40B3-9DD4-438144785F81}.Release|x86.Build.0 = Release|Any CPU
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Debug|Any CPU.Build.0 = Debug|x64
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Debug|x64.ActiveCfg = Debug|x64
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Debug|x64.Build.0 = Debug|x64
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Debug|x86.ActiveCfg = Debug|Win32
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Debug|x86.Build.0 = Debug|Win32
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Release|Any CPU.ActiveCfg = Release|Win32
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Release|x64.ActiveCfg = Release|x64
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Release|x64.Build.0 = Release|x64
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Release|x86.ActiveCfg = Release|Win32
+		{74173822-8273-4374-B4FB-6A26D86391E6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
