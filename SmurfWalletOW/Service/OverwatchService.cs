@@ -54,13 +54,15 @@ namespace SmurfWalletOW.Service
         private bool StartGame(SecureString key, Account account)
         {
 
-            var settingsAreSet = _fileService.SetOverwatchSettingsToWindowedAsync().Result;
-            var settings = _fileService.GetSettingsAsync().Result;
-            var wh = StartOverwatch(settings.OverwatchPath);
-            var finished = InsertCredentials(wh, account, key, settings);
 
+            var settingsAreGood = _fileService.SetOverwatchSettingsToWindowedAsync().Result;
+
+            var settings = _fileService.GetSettingsAsync().Result; 
+            var wh = StartOverwatch(settings.OverwatchPath);
+            var finished = InsertCredentials(wh,account,key,settings,settingsAreGood);
             //maximize after done
-             SendKeys.SendWait("%{ENTER}");
+            if (settingsAreGood)
+                SendKeys.SendWait("%{ENTER}");
 
             return finished;
         }     
@@ -80,15 +82,16 @@ namespace SmurfWalletOW.Service
             return app.MainWindowHandle;
         }
 
-        private bool InsertCredentials(IntPtr wh,Account account,SecureString key, Settings settings)
+        private bool InsertCredentials(IntPtr wh,Account account,SecureString key, Settings settings,bool settingsState)
         {
             Native.SetForegroundWindow(wh);
 
+
+            if (settingsState) { 
             Native.MoveWindow(wh, 0, 0, 720, 436, false);
 
             Color theColor = Color.FromArgb(255, 209, 209, 212);
             Color pixel1, pixel2;
-
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
@@ -103,7 +106,11 @@ namespace SmurfWalletOW.Service
 
 
             sw.Stop();
-
+            }
+            else
+            {
+                Thread.Sleep(Convert.ToInt32(Math.Round(settings.LoadingTime * 1000)));
+            }
             SendKeys.SendWait(account.Email);
             Thread.Sleep(750);
             SendKeys.SendWait("{TAB}");
@@ -128,6 +135,8 @@ namespace SmurfWalletOW.Service
             SendKeys.SendWait("{ENTER}");
             return true;
         }
+
+
 
 
         private Bitmap GetScreenshot(IntPtr hwnd)

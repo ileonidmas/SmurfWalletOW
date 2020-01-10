@@ -5,6 +5,7 @@ using SmurfWalletOW.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -117,13 +118,43 @@ namespace SmurfWalletOW.Service
 
         private bool SetOverwatchSettingsToWindowed()
         {
-            var owSettings = File.ReadAllLines(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + @"Documents\Overwatch\Settings\Settings_v0.ini");
-            owSettings[20] = "FullscreenWindow = \"0\"";
-            owSettings[21] = "FullscreenWindowEnabled = \"0\"";
-            owSettings[46] = "WindowMode = \"2\"";
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + @"Documents\Overwatch\Settings\Settings_v0.ini";
+            if (!File.Exists(path))
+                return false;
+            var owSettings = File.ReadAllLines(path);
+            int startIndex = 0, stopIndex = 0;
+            bool fsw = false, fswe = false, wm = false, reachedRender = false;
+            for (int i = 0; i < owSettings.Length; i++)
+            {
+                if (!reachedRender)
+                {
+                    if (owSettings[i] == "[Render.13]")
+                        reachedRender = true;
+                    continue;
+                }
+
+                if (owSettings[i] == "")
+                {
+                    stopIndex = i;
+                    break;
+                }                               
+            }            
+
+            if (!reachedRender)
+                return false;
+
+            if (owSettings[stopIndex - 1].Split(' ')[0] == "WindowMode")
+                owSettings[stopIndex - 1] = "WindowMode = \"2\"";
+            else
+            {
+                var list = owSettings.ToList();
+                list.Insert(stopIndex, "WindowMode = \"2\"");
+                owSettings = list.ToArray();
+            }
+
             File.WriteAllLines(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + @"Documents\Overwatch\Settings\Settings_v0.ini", owSettings);
             return true;
-        }
+        }                
 
         private string GetApplicationFilesPath()
         {
