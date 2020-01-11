@@ -6,14 +6,8 @@ namespace SmurfWalletOW.Util
 {
     public static class Native
     {
-        //from my dll
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void NotificationCallbackDelegate();
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void SetNotificationCallbackDelegate(NotificationCallbackDelegate callback);
-
-
+        [DllImport("Shell.dll")]
+        public static extern void SetWindowHandle(IntPtr hWnd);
 
         //from win
         public const int WH_SHELL = 10;
@@ -51,7 +45,6 @@ namespace SmurfWalletOW.Util
         public static extern IntPtr LoadLibrary(string lpFileName);
         [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
         public static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
-
 
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr ProcessId);

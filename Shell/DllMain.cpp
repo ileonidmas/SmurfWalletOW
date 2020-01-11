@@ -6,14 +6,20 @@
 #include <iostream>
 #include <fstream>
 
+//these variables will be shared among all processes to which this dll is linked
+#pragma data_seg("Shared")
+HWND _mainHwnd = nullptr;
+#pragma data_seg() //end of our data segment
+
+#pragma comment(linker,"/section:Shared,rws")
+// Tell the compiler that Shared section can be read,write and shared
 using namespace std;
 
-
 extern "C" {
-    typedef void(__stdcall* NotificationCallback)();
-    NotificationCallback notificationCallback = nullptr;
-    __declspec(dllexport) void  __cdecl SetNotificationCallback(NotificationCallback callback) {
-        notificationCallback = callback;
+    
+
+    __declspec(dllexport) void  __cdecl SetWindowHandle(HWND mainHwnd) {
+        _mainHwnd = mainHwnd;
     }
 
     __declspec(dllexport) LRESULT CALLBACK CallWndProc(int nCode, WPARAM wParam, LPARAM lParam) {
@@ -23,25 +29,8 @@ extern "C" {
         }
 
         if (nCode == HSHELL_REDRAW) {
-            ofstream file;
-            file.open("C:\\Users\\lema\\Desktop\\scripts\\Test.txt", ios_base::app);
-            file << "Redraw was called\n"  << " \n";
-            file.close();
-        }
-        ofstream file;
-        file.open("C:\\Users\\lema\\Desktop\\scripts\\Test.txt", ios_base::app);
-
-        if (notificationCallback != nullptr) {
-            notificationCallback();
-            file << "NCode: " << nCode << " wParam: " << wParam << " lParam: " << lParam << " pointer: " << notificationCallback << " \n";
-
-        }
-        else {
-            file << "NCode: " << nCode << " wParam: " << wParam << " lParam: " << lParam << " pointer: " << " null \n";
-
-        }
-        file.close();
-        
+            SendMessage(_mainHwnd, 0X400, 1, 0); // notify user that something happened
+        }              
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
 }
