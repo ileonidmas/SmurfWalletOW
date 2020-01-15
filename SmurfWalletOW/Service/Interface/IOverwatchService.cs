@@ -12,7 +12,7 @@ namespace SmurfWalletOW.Service.Interface
     {
         Task<bool> StartGameAsync(SecureString key,Account account);
 
-        void Hook();
+        bool Hook();
         void UnHook();
     }
 }

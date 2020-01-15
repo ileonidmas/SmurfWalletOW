@@ -11,5 +11,6 @@ namespace SmurfWalletOW.Service.Interface
     {
         SecureString DecryptString(SecureString masterKey, string password, bool manual);
         string EncryptString(SecureString masterKey, SecureString password, bool manual);
+        string DecryptString(string masterKey, string password);
     }
 }

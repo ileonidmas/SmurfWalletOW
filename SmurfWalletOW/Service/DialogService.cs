@@ -27,9 +27,9 @@ namespace SmurfWalletOW.Service
             _dialogFactory = dialogFactory;
         }
 
-        public DialogResult ShowDialog(DialogsEnum dialog, Window owner)
+        public DialogResult ShowDialog(DialogsEnum dialog, Window owner,string message)
         {
-            var vm = _dialogFactory.Get(dialog);
+            var vm = _dialogFactory.Get(dialog, message);
             DialogWindow win = new DialogWindow();
             if (owner != null)
                 win.Owner = owner;

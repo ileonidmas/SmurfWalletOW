@@ -9,6 +9,6 @@ namespace SmurfWalletOW.Factory.Interface
 {
     public interface IFactory<T>
     {
-        ViewModelBase Get(T val);
+        ViewModelBase Get(T val,string message);
     }
 }

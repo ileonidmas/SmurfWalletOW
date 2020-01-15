@@ -5,6 +5,7 @@ using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,15 @@ namespace SmurfWalletOW.ViewModel
 
         private Settings _settings;
         private RelayCommand _updateOverwatchPathCommand;
+        private RelayCommand<Uri> _redirectCommand;
+        private RelayCommand<Window> _saveCommand;
+        private RelayCommand<Window> _cancelCommand;
+
+        public RelayCommand<Uri> RedirectCommand
+        {
+            get => _redirectCommand;
+            set => Set(ref _redirectCommand, value);
+        }
 
         public Settings Settings
         {
@@ -28,14 +38,12 @@ namespace SmurfWalletOW.ViewModel
             set => Set(ref _settings, value);
         }
 
-        private RelayCommand<Window> _saveCommand = null;
         public RelayCommand<Window> SaveCommand
         {
             get { return _saveCommand; }
             set { _saveCommand = value; }
         }
 
-        private RelayCommand<Window> _cancelCommand = null;
         public RelayCommand<Window> CancelCommand
         {
             get { return _cancelCommand; }
@@ -63,9 +71,13 @@ namespace SmurfWalletOW.ViewModel
             _updateOverwatchPathCommand = new RelayCommand(UpdateOverwatchPath);
             _saveCommand = new RelayCommand<Window>((parameter)=>SaveSettings(parameter));
             _cancelCommand = new RelayCommand<Window>((parameter) => Cancel(parameter)); 
-            _loadCommand = new RelayCommand(Load);
+            _loadCommand = new RelayCommand(Load); 
+            _redirectCommand = new RelayCommand<Uri>((parameter) => Redirect(parameter));
         }
-
+        private void Redirect(Uri uri)
+        {
+            Process.Start(new ProcessStartInfo(uri.AbsoluteUri));
+        }
         private async void SaveSettings(object parameter)
         {
             await _fileService.SaveSettingsAsync(Settings);

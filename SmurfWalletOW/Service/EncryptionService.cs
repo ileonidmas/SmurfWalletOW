@@ -84,6 +84,45 @@ namespace SmurfWalletOW.Service
             return Convert.ToBase64String(array);
         }
 
+        public string DecryptString(string masterKey, string password)
+        {
+            byte[] iv = new byte[16];
+            byte[] buffer = Convert.FromBase64String(password);
+
+            if (masterKey.Length < 16)
+            {
+                while (masterKey.Length != 16)
+                {
+                    masterKey.Append('0');
+                }
+            }
+            else if (masterKey.Length > 16)
+            {
+                while (masterKey.Length != 16)
+                {
+                    masterKey = masterKey.Remove(masterKey.Length - 1);
+                }
+            }
+
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = Encoding.UTF8.GetBytes(masterKey);
+                aes.IV = iv;
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+                        {
+                            return streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
+
+
         public SecureString DecryptString(SecureString masterKey, string password, bool manual)
         {
             if (!manual)

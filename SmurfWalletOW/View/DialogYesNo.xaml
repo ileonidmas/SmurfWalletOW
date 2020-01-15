@@ -16,7 +16,7 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Message}"/>
-        <Button Grid.Row="1" Content="Yes" Command="{Binding YesCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5" />
-        <Button Grid.Row="1" Grid.Column="1" Content="No"  Command="{Binding NoCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5" />
+        <Button Grid.Row="1" Content="Yes" Command="{Binding YesCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5" Style="{StaticResource OrangeButton}" />
+        <Button Grid.Row="1" Grid.Column="1" Content="No"  Command="{Binding NoCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5" Style="{StaticResource OrangeButton}" />
     </Grid>
 </UserControl>

@@ -29,8 +29,18 @@ extern "C" {
         }
 
         if (nCode == HSHELL_REDRAW) {
-            SendMessage(_mainHwnd, 0X400, 1, 0); // notify user that something happened
-        }              
+            SendMessage(_mainHwnd, 0X400, 0, 0); // notify user that something happened
+        }   
+
+        if (nCode == HSHELL_ACCESSIBILITYSTATE) {
+            std::ofstream outfile;
+            outfile.open("C:\\Users\\lema\\Desktop\\test.txt", std::ios_base::app); // append instead of overwrite
+            outfile << nCode << " " << wParam << " " << lParam << "\n";
+            outfile.close();
+            if(wParam == 1)
+                SendMessage(_mainHwnd, 0X401, 0, 0); // notify user that something happened
+        }
+
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
 }

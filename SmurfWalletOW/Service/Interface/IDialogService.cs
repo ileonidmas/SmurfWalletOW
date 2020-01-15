@@ -14,6 +14,6 @@ namespace SmurfWalletOW.Service.Interface
 {
     public interface IDialogService
     {
-        DialogResult ShowDialog(DialogsEnum dialog, Window owner);
+        DialogResult ShowDialog(DialogsEnum dialog, Window owner, string message = "");
     }
 }

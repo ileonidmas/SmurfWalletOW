@@ -32,9 +32,13 @@ namespace SmurfWalletOW.Service
         public delegate void SetWindowHandle(IntPtr handle);
 
         public Process app;
-        public void Hook()
+        public bool Hook()
         {
             //hook
+            var apps = Process.GetProcessesByName("Overwatch");
+            if(apps.Length == 0)
+                return false;
+            app = apps[0];
             var wndHandle = app.MainWindowHandle;
             var thread_id = Native.GetWindowThreadProcessId(wndHandle, IntPtr.Zero);
             var dll = Native.LoadLibrary("Shell.dll");
@@ -45,6 +49,7 @@ namespace SmurfWalletOW.Service
             var handle = Process.GetCurrentProcess().MainWindowHandle;
             Native.SetWindowHandle(handle);
 
+            return true;
 
         }
 

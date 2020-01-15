@@ -102,7 +102,7 @@ namespace SmurfWalletOW.ViewModel
         private async void DeleteAccount(object[] parameters)
         {
             var account = parameters[0] as Account;
-            DialogResult result = _dialogService.ShowDialog(DialogsEnum.DialogYesNo, parameters[1] as Window);
+            DialogResult result = _dialogService.ShowDialog(DialogsEnum.DialogYesNo, parameters[1] as Window, "Are you sure you want to delete this entry?");
             if (result == DialogResult.Yes)
             {
                 if (await _fileService.DeleteAccountAsync(account))

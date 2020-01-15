@@ -23,8 +23,9 @@ namespace SmurfWalletOW.Factory
             SimpleIoc.Default.Register<DialogEncryptionKeyViewModel>();
             SimpleIoc.Default.Register<DialogSettingsViewModel>();
             SimpleIoc.Default.Register<DialogYesNoViewModel>();
+            SimpleIoc.Default.Register<DialogNotificationViewModel>();
         }
-        public ViewModelBase Get(DialogsEnum dialogs)
+        public ViewModelBase Get(DialogsEnum dialogs, string message)
         {
             switch (dialogs)
             {
@@ -37,7 +38,13 @@ namespace SmurfWalletOW.Factory
                 case DialogsEnum.DialogSettings:
                     return SimpleIoc.Default.GetInstance<DialogSettingsViewModel>();
                 case DialogsEnum.DialogYesNo:
-                    return SimpleIoc.Default.GetInstance<DialogYesNoViewModel>();
+                    var dialogYesNoViewModel = SimpleIoc.Default.GetInstance<DialogYesNoViewModel>();
+                    dialogYesNoViewModel.Message = message;
+                    return dialogYesNoViewModel;
+                case DialogsEnum.DialogNotification:
+                    var dialogNotificationViewModel = SimpleIoc.Default.GetInstance<DialogNotificationViewModel>();
+                    dialogNotificationViewModel.Message = message;
+                    return dialogNotificationViewModel;
             }
             return null;
         }     

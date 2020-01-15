@@ -104,6 +104,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behavior\BehaviorBase.cs" />
+    <Compile Include="Behavior\ClosingBehavior.cs" />
     <Compile Include="Behavior\DoubleClickBehavior.cs" />
     <Compile Include="Behavior\LoadingBehavior.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
@@ -122,10 +123,12 @@
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Service\AppSettingsService.cs" />
     <Compile Include="Service\DialogService.cs" />
+    <Compile Include="Service\DiscordService.cs" />
     <Compile Include="Service\EncryptionService.cs" />
     <Compile Include="Service\FileService.cs" />
     <Compile Include="Service\Interface\IAppSettingsService.cs" />
     <Compile Include="Service\Interface\IDialogService.cs" />
+    <Compile Include="Service\Interface\IDiscordService.cs" />
     <Compile Include="Service\Interface\IEncryptionService.cs" />
     <Compile Include="Service\Interface\IFileService.cs" />
     <Compile Include="Service\Interface\IOverwatchService.cs" />
@@ -135,6 +138,7 @@
     <Compile Include="ViewModel\DialogAboutViewModel.cs" />
     <Compile Include="ViewModel\DialogAccountViewModel.cs" />
     <Compile Include="ViewModel\DialogEncryptionKeyViewModel.cs" />
+    <Compile Include="ViewModel\DialogNotificationViewModel.cs" />
     <Compile Include="ViewModel\DialogSettingsViewModel.cs" />
     <Compile Include="ViewModel\DialogViewModelBase.cs" />
     <Compile Include="ViewModel\DialogYesNoViewModel.cs" />
@@ -151,6 +155,9 @@
     </Compile>
     <Compile Include="View\DialogEncryptionKey.xaml.cs">
       <DependentUpon>DialogEncryptionKey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DialogNotification.xaml.cs">
+      <DependentUpon>DialogNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DialogSettings.xaml.cs">
       <DependentUpon>DialogSettings.xaml</DependentUpon>
@@ -177,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DialogEncryptionKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DialogNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

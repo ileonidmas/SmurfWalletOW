@@ -43,11 +43,11 @@ namespace SmurfWalletOW.ViewModel
         {
             try
             {
-                _appVersion ="Version: " + ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                _appVersion ="Version: " + ApplicationDeployment.CurrentDeployment.CurrentVersion.Major+ "." + ApplicationDeployment.CurrentDeployment.CurrentVersion.Minor;
             }
             catch (Exception)
             {
-                _appVersion = "Version: " + Assembly.GetExecutingAssembly().GetName().Version;
+                _appVersion = "Version: " + Assembly.GetExecutingAssembly().GetName().Version.Major + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor;
             }
         }
     }

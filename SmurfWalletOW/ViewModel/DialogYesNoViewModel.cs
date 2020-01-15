@@ -34,8 +34,6 @@ namespace SmurfWalletOW.ViewModel
         public DialogYesNoViewModel() 
         {
             Title = "Message";
-            Message = "Are you sure you want to delete this entry?";
-
             this.yesCommand = new RelayCommand<Window>((w) => OnYesClicked(w));
             this.noCommand = new RelayCommand<Window>((w) => OnNoClicked(w));
         }

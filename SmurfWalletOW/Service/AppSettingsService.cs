@@ -14,15 +14,31 @@ namespace SmurfWalletOW.Service
 {
     public class AppSettingsService : IAppSettingsService
     {
+        private readonly IEncryptionService _encryptionService;
+
+        public AppSettingsService(IEncryptionService encryptionService)
+        {
+            _encryptionService = encryptionService;
+        }
+
         public Task<string> GetKeyAsync(string key)
         {
-            return Task.Factory.StartNew(()=>GetKey(key));
-        }
-              
+            return Task.Run(()=>GetKey(key));
+        }              
 
         public Task<bool> SetKeyAsync(string key, object value)
         {
-            return Task.Factory.StartNew(()=>SetKey(key,value));
+            return Task.Run(()=>SetKey(key,value));
+        }
+
+        public Task<string> GetDiscordTokenAsync()
+        {
+            return Task.Run(GetDiscordToken);
+        }
+
+        private string GetDiscordToken()
+        {
+            return _encryptionService.DecryptString("43CH90zIyWDMrOYj5IAD", ConfigurationManager.ConnectionStrings["DiscordToken"].ConnectionString);
         }
 
         private string GetKey(string key)

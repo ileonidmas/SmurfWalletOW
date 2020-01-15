@@ -30,6 +30,7 @@ namespace SmurfWalletOW.ViewModel
                 SimpleIoc.Default.Register<IEncryptionService, EncryptionService>();
                 SimpleIoc.Default.Register<IDialogService, DialogService>();
                 SimpleIoc.Default.Register<IOverwatchService, OverwatchService>();
+                SimpleIoc.Default.Register<IDiscordService, DiscordService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
@@ -54,6 +55,11 @@ namespace SmurfWalletOW.ViewModel
         public DialogYesNoViewModel DialogYesNoViewModel
         {
             get { return SimpleIoc.Default.GetInstance<DialogYesNoViewModel>(); }
+        }
+
+        public DialogNotificationViewModel DialogNotificationViewModel
+        {
+            get { return SimpleIoc.Default.GetInstance<DialogNotificationViewModel>(); }
         }
 
         public DialogAccountViewModel DialogAccountViewModel

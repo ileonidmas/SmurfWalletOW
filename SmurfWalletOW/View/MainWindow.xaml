@@ -21,21 +21,27 @@
         ShowMinButton="False"
         ShowMaxRestoreButton="False"
         ResizeMode="NoResize"
-        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+    behaviors:ClosingBehavior.Command="{Binding CloseCommand}" 
+    behaviors:ClosingBehavior.CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+        >
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands Background="Black">
-            <Button Content="About" Foreground="{StaticResource OverwatchWhiteColor}"  Command="{Binding OpenAboutCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-            <Button  Command="{Binding OpenSettingsCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" >
-                <iconPacks:PackIconModern Kind="Settings" Foreground="{StaticResource OverwatchWhiteColor}" />
+            <Button  Command="{Binding OpenAboutCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" >
+                <iconPacks:PackIconOcticons Kind="Organization" Foreground="{StaticResource OverwatchWhiteColor}" />
             </Button>
-            <Button Content="Hook" Foreground="{StaticResource OverwatchWhiteColor}"  Command="{Binding HookCommand}"  Style="{StaticResource CustomButtonStyle}"  />
-
+            <Button  Command="{Binding OpenSettingsCommand}" Style="{StaticResource CustomButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" >
+                <iconPacks:PackIconOcticons Kind="Gear" Foreground="{StaticResource OverwatchWhiteColor}" />
+            </Button>
+            <Button  Command="{Binding HookCommand}"  Style="{StaticResource CustomSwitchButtonStyle}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" IsEnabled="{Binding Enabled}">
+                <iconPacks:PackIconOcticons Kind="Bell" />
+            </Button>
 
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
-   
 
-    <Grid>
+
+    <Grid >
         <view:AccountListView />
     </Grid>
 </controls:MetroWindow>

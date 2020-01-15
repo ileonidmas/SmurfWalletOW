@@ -12,6 +12,7 @@ namespace SmurfWalletOW.Enums
         DialogAccountView,
         DialogEncryptionKey,
         DialogSettings,
-        DialogYesNo
+        DialogYesNo,
+        DialogNotification
     }
 }

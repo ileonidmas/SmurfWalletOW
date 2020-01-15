@@ -55,11 +55,7 @@ namespace PostInstallationConfiguration
                 File.Delete(shortcutFullPath);
             }
         }
-
-        private void CreateIcon()
-        {
-
-        }
+        
         private void AddShortcutToDesktop()
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);

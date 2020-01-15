@@ -10,6 +10,6 @@ namespace SmurfWalletOW.Factory.Interface
 {
     public interface IDialogFactory : IFactory<DialogsEnum>
     {
-        new ViewModelBase Get(DialogsEnum dialogs);
+        new ViewModelBase Get(DialogsEnum dialogs, string message);
     }
 }
