@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace PostInstallationConfiguration
             base.Commit(savedState);
             //change link
             AddShortcutToDesktop();
+            Process.Start( this.Context.Parameters["targetDir"] + "VC_redist.x64.exe");
         }
 
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand)]
@@ -42,6 +44,7 @@ namespace PostInstallationConfiguration
             base.Uninstall(savedState);
             //delete shortcut
             RemoveShortcut();
+            Process.Start(this.Context.Parameters["targetDir"] + "VC_redist.x64.exe");
         }
 
         //private

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SmurfWalletOW.Service
 {
@@ -96,7 +97,8 @@ namespace SmurfWalletOW.Service
         }
         private string[] SplitUsername(string username)
         {
-           return username.Split('#');
+            var result = username.Split('#');
+            return username.Split('#');
         }
         
     }

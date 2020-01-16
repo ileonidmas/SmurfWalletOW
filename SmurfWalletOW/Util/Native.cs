@@ -6,7 +6,7 @@ namespace SmurfWalletOW.Util
 {
     public static class Native
     {
-        [DllImport("Shell.dll")]
+        [DllImport("NotificationDll.dll")]
         public static extern void SetWindowHandle(IntPtr hWnd);
 
         //from win

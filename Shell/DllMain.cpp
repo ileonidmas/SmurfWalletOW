@@ -1,10 +1,6 @@
 
-#include "DllMain.h"
-#include "HookListener.h"
 
 #include <windows.h>
-#include <iostream>
-#include <fstream>
 
 //these variables will be shared among all processes to which this dll is linked
 #pragma data_seg("Shared")
@@ -33,10 +29,6 @@ extern "C" {
         }   
 
         if (nCode == HSHELL_ACCESSIBILITYSTATE) {
-            std::ofstream outfile;
-            outfile.open("C:\\Users\\lema\\Desktop\\test.txt", std::ios_base::app); // append instead of overwrite
-            outfile << nCode << " " << wParam << " " << lParam << "\n";
-            outfile.close();
             if(wParam == 1)
                 SendMessage(_mainHwnd, 0X401, 0, 0); // notify user that something happened
         }

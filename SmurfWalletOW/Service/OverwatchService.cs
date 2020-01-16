@@ -36,19 +36,17 @@ namespace SmurfWalletOW.Service
         {
             //hook
             var apps = Process.GetProcessesByName("Overwatch");
-            if(apps.Length == 0)
+            if (apps.Length == 0)
                 return false;
             app = apps[0];
             var wndHandle = app.MainWindowHandle;
             var thread_id = Native.GetWindowThreadProcessId(wndHandle, IntPtr.Zero);
-            var dll = Native.LoadLibrary("Shell.dll");
+            var dll = Native.LoadLibrary("NotificationDll.dll");
             var shellCallbackPtr = Native.GetProcAddress(dll, "CallWndProc");
             whook = Native.SetWindowsHookEx(Native.WH_SHELL, shellCallbackPtr, dll, thread_id);
-
             // set window handle
             var handle = Process.GetCurrentProcess().MainWindowHandle;
             Native.SetWindowHandle(handle);
-
             return true;
 
         }
