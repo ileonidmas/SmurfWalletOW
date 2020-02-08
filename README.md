@@ -21,3 +21,4 @@ NEW VERSION 1.2 !!!!!
 1) fixed issue with special symbols
 2) improved sign in functionality
 3) implemented edit method for entries
+4) implemented option to shutdown application upon login
