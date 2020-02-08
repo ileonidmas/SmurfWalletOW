@@ -14,3 +14,10 @@ Additionaly, in order to build an installer, you will have to install this packa
 NEW VERSION 1.1 !!!!!
 
 Now you can enable notification to receive messages in discord. For that you need to install new version of SmurfWalletOW which contains additional libraries, join discord server here https://discord.gg/VGCs3G4 and setup your discord tag in Settings. Video on how to use it will come as soon as it will get user tested and approved by blizzard
+
+
+NEW VERSION 1.2 !!!!!
+
+1) fixed issue with special symbols
+2) improved sign in functionality
+3) implemented edit method for entries
