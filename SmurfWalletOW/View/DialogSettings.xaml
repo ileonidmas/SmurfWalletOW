@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{Binding DialogSettingsViewModel, Source={StaticResource Locator}}"
-             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.15' }" 
+             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.2' }" 
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource RatioConverter}, ConverterParameter='0.25' }" >
     <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}">
         <Grid.ColumnDefinitions>
@@ -15,6 +15,7 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
@@ -29,10 +30,12 @@
         <!--<Button Grid.Row="0"  Grid.Column="2"  Content="Set" Command="{Binding UpdateOverwatchCommand}" />-->
         <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Loading time threshold (seconds)"/>
         <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.LoadingTime}" Margin="1" TextAlignment="Center"/>
-        <Label Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord name tag (Player#1234)"/>
-        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Settings.DiscordUsername}" Margin="1" TextAlignment="Center"/>
-        <Label Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord invite link"/>
-        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">           
+        <Label Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Close application after log in"/>
+        <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Settings.ExitAfterLogin}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord name tag (Player#1234)"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Settings.DiscordUsername}" Margin="1" TextAlignment="Center"/>
+        <Label Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord invite link"/>
+        <TextBlock Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">           
             <Hyperlink  NavigateUri="https://discord.gg/VGCs3G4 "  Command="{Binding RedirectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}">
                      https://discord.gg/VGCs3G4  
             </Hyperlink>

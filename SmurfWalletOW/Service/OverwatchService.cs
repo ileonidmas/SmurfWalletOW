@@ -68,7 +68,6 @@ namespace SmurfWalletOW.Service
             var settings = _fileService.GetSettingsAsync().Result; 
             var wh = StartOverwatch(settings.OverwatchPath);
             var finished = InsertCredentials(wh,account,key,settings);
-
             return finished;
         }     
 

@@ -155,6 +155,10 @@ namespace SmurfWalletOW.ViewModel
                 await _overwatchService.StartGameAsync(null, account);
             }
 
+            var settings = await _fileService.GetSettingsAsync();
+            if (settings.ExitAfterLogin)
+                Application.Current.Shutdown();
+
         }
         private Account _selectedAccount;
 

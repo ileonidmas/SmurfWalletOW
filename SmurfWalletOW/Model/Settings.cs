@@ -11,6 +11,7 @@ namespace SmurfWalletOW.Model
         private string _overwatchPath; 
         private string _discordUsername;
         private double _loadingTime;
+        private bool _exitAfterLogin;
         public Settings()
         {
         }
@@ -31,6 +32,12 @@ namespace SmurfWalletOW.Model
         {
             get => _discordUsername;
             set => Set(ref _discordUsername, value);
+        }
+
+        public bool ExitAfterLogin
+        {
+            get => _exitAfterLogin;
+            set => Set(ref _exitAfterLogin, value);
         }
     }
 }
