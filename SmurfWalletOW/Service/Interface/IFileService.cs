@@ -10,14 +10,12 @@ namespace SmurfWalletOW.Service.Interface
     public interface IFileService
     {
         Task<List<Account>> GetAccountsAsync();
-
         Task<bool> DeleteAccountAsync(Account account);
-
+        Task<bool> UpdateAccountAsync(Account account);
+        Task<Account> GetAccountAsync(string id);
         Task<bool> AddAccountAsync(Account account);
-
         Task<Settings> GetSettingsAsync();
         Task<bool> SaveSettingsAsync(Settings settings);
-        Task<bool> SetOverwatchSettingsToWindowedAsync();
 
     }
 }

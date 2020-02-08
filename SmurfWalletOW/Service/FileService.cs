@@ -29,6 +29,15 @@ namespace SmurfWalletOW.Service
         {
             return Task.Factory.StartNew(() => Delete(account));
         }
+        public Task<bool> UpdateAccountAsync(Account account)
+        {
+            return Task.Factory.StartNew(() => Update(account));
+        }
+
+        public Task<Account> GetAccountAsync(string id)
+        {
+            return Task.Factory.StartNew(() => Get(id));
+        }
 
         public Task<Settings> GetSettingsAsync()
         {
@@ -40,10 +49,10 @@ namespace SmurfWalletOW.Service
             return Task.Factory.StartNew(() => SaveSettings(settings));
         }
 
-        public Task<bool> SetOverwatchSettingsToWindowedAsync()
-        {
-            return Task.Factory.StartNew(SetOverwatchSettingsToWindowed);
-        }
+        //public Task<bool> SetOverwatchSettingsToWindowedAsync()
+        //{
+        //    return Task.Factory.StartNew(SetOverwatchSettingsToWindowed);
+        //}
 
         public FileService(IAppSettingsService appSettingsService)
         {
@@ -83,6 +92,22 @@ namespace SmurfWalletOW.Service
             var list = GetAccountList();
             list.RemoveAll((a) => a.Id == account.Id);
             return SaveAccountList(list);
+        }
+
+        private bool Update(Account account)
+        {
+            var list = GetAccountList();
+            var index = list.IndexOf(list.Where(x => x.Id == account.Id).First());
+            list.RemoveAt(index);
+            list.Insert(index, account);
+            return SaveAccountList(list);
+
+        }
+        private Account Get(string id)
+        {
+            var list = GetAccountList();
+            return list.Where(x => x.Id == id).First();
+
         }
 
         private Settings GetSettings()

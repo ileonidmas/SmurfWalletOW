@@ -10,6 +10,7 @@ namespace SmurfWalletOW.Enums
     {
         DialogsAbout,
         DialogAccountView,
+        DialogAccountUpdateView,
         DialogEncryptionKey,
         DialogSettings,
         DialogYesNo,

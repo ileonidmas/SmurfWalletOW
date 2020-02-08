@@ -6,99 +6,15 @@
              xmlns:v="clr-namespace:SmurfWalletOW.View"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <converter:MultiValueConverter x:Key="MultiValueConverter"/>
-        <converter:RatioConverter x:Key="RatioConverter"/>
-        <vm:ViewModelLocator x:Key="Locator"/>
+        <ResourceDictionary>
 
-        <SolidColorBrush x:Key="OverwatchWhiteColor">#ffffff</SolidColorBrush>
-        <SolidColorBrush x:Key="OverwatchOrangeColor">#ffc168</SolidColorBrush>
-        <SolidColorBrush x:Key="OverwatchGreyColor">#878787</SolidColorBrush>
-        <SolidColorBrush x:Key="OverwatchBlackColor">#000000</SolidColorBrush>
-
-        <DataTemplate DataType="{x:Type vm:DialogYesNoViewModel}">
-            <v:DialogYesNo/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DialogAccountViewModel}">
-            <v:DialogAccountView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DialogEncryptionKeyViewModel}">
-            <v:DialogEncryptionKey/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DialogSettingsViewModel}">
-            <v:DialogSettings/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DialogAboutViewModel}">
-            <v:DialogAboutView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DialogNotificationViewModel}">
-            <v:DialogNotification/>
-        </DataTemplate>
-
-        <Style x:Key="OrangeButton" TargetType="Button">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="FontSize" Value="11px"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground"  Value="{StaticResource OverwatchWhiteColor}" />
-            <Setter Property="Background" Value="{StaticResource OverwatchOrangeColor}" />
-        </Style>
-        <Style x:Key="CustomButtonStyle" TargetType="Button">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-
-        <Style x:Key="CustomSwitchButtonStyle"  TargetType="Button">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Hooked}"
-                             Value="True">
-                    <Setter Property="Foreground" Value="Goldenrod" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Hooked}"
-                             Value="False">
-                    <Setter Property="Foreground" Value="White" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="TextBoxStyle" TargetType="TextBox">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="FontSize" Value="14px"/>
-            <Setter Property="Height" Value="21px"/>
-            <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
-        </Style>
-        
-        <Style x:Key="BlackLabel" TargetType="Label">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="FontSize" Value="21px"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
-        </Style>
-        
-        
-        <Style x:Key="BlackLabelLittle" TargetType="Label">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="FontSize" Value="11px"/>
-            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
-        </Style>
-        
-        <Style x:Key="BlackCheckboxLittle" TargetType="CheckBox">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="FontSize" Value="14px"/>
-            <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
-            <Setter Property="VerticalContentAlignment"  Value="Center" />
-        </Style>
-        <ResourceDictionary x:Key="MahApps">
+            <vm:ViewModelLocator x:Key="Locator"/>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Custom resources -->
+                <ResourceDictionary Source="Resources/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Converters.xaml"/>
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Templates.xaml"/>
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
@@ -106,8 +22,11 @@
                 <!-- Accent and AppTheme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
+
+
+
     </Application.Resources>
 </Application>

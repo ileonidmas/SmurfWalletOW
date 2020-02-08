@@ -6,5 +6,6 @@
     <SolidColorBrush x:Key="OverwatchOrangeColor">#ffc168</SolidColorBrush>
     <SolidColorBrush x:Key="OverwatchGreyColor">#878787</SolidColorBrush>
     <SolidColorBrush x:Key="OverwatchBlackColor">#000000</SolidColorBrush>
-    <SolidColorBrush x:Key="MyBrush" Color="Gold"/>
+
+ 
 </ResourceDictionary>

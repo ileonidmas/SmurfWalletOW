@@ -3,4 +3,5 @@
                     xmlns:converter="clr-namespace:SmurfWalletOW.Converter">
     <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converter:MultiValueConverter x:Key="MultiValueConverter"/>
+    <converter:RatioConverter x:Key="RatioConverter"/>
 </ResourceDictionary>

@@ -119,6 +119,7 @@
     <Compile Include="Factory\Interface\IFactory.cs" />
     <Compile Include="Message\SaveAccountMessage.cs" />
     <Compile Include="Message\SetEncryptionMessage.cs" />
+    <Compile Include="Message\UpdateAccountMessage.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\Settings.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Util\Native.cs" />
     <Compile Include="ViewModel\AccountListViewModel.cs" />
     <Compile Include="ViewModel\DialogAboutViewModel.cs" />
+    <Compile Include="ViewModel\DialogAccountUpdateViewModel.cs" />
     <Compile Include="ViewModel\DialogAccountViewModel.cs" />
     <Compile Include="ViewModel\DialogEncryptionKeyViewModel.cs" />
     <Compile Include="ViewModel\DialogNotificationViewModel.cs" />
@@ -169,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

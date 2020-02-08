@@ -8,10 +8,19 @@
     <DataTemplate DataType="{x:Type vm:DialogAccountViewModel}">
         <v:DialogAccountView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogAccountUpdateViewModel}">
+        <v:DialogAccountView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:DialogEncryptionKeyViewModel}">
         <v:DialogEncryptionKey/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:DialogSettingsViewModel}">
         <v:DialogSettings/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogAboutViewModel}">
+        <v:DialogAboutView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogNotificationViewModel}">
+        <v:DialogNotification/>
     </DataTemplate>
 </ResourceDictionary>

@@ -25,6 +25,7 @@ namespace SmurfWalletOW.ViewModel
         private readonly IOverwatchService _overwatchService;
 
         private RelayCommand<object[]> _deleteAccountCommand;
+        private RelayCommand<object[]> _updateAccountCommand;
         private RelayCommand<object[]> _playCommand;
         private RelayCommand<object> _addAccountCommand;
 
@@ -57,6 +58,11 @@ namespace SmurfWalletOW.ViewModel
             get => _deleteAccountCommand;
             set => Set(ref _deleteAccountCommand, value);
         }
+        public RelayCommand<object[]> UpdateAccountCommand
+        {
+            get => _updateAccountCommand;
+            set => Set(ref _updateAccountCommand, value);
+        }
 
         public AccountListViewModel(IFileService fileService, IDialogService dialogService, IOverwatchService overwatchService)
         {
@@ -66,11 +72,13 @@ namespace SmurfWalletOW.ViewModel
 
             _addAccountCommand = new RelayCommand<object>((parameter) => AddAccount(parameter));
             _deleteAccountCommand = new RelayCommand<object[]>((parameters) => DeleteAccount(parameters));
+            _updateAccountCommand = new RelayCommand<object[]>((parameters) => UpdateAccount(parameters));
             _playCommand = new RelayCommand<object[]>((parameters) => Play(parameters));
             _loadCommand = new RelayCommand(Load);
 
             MessengerInstance.Register<SaveAccountMessage>(this, SaveAccount);
             MessengerInstance.Register<SetEncryptionMessage>(this, SetEncryption);
+            MessengerInstance.Register<UpdateAccountMessage>(this, Update);
         }
 
         private async void Load()
@@ -86,6 +94,10 @@ namespace SmurfWalletOW.ViewModel
         {
             _dialogService.ShowDialog(DialogsEnum.DialogAccountView,parameter as Window);
         }
+        private void UpdateAccount(object[] parameter)
+        {
+            _dialogService.ShowDialog(DialogsEnum.DialogAccountUpdateView, parameter[1] as Window, (parameter[0] as Account).Id);
+        }
 
         private async void SaveAccount(SaveAccountMessage message)
         {
@@ -96,6 +108,20 @@ namespace SmurfWalletOW.ViewModel
             else
             {
                 //failed to save
+            }
+        }
+
+        private async void Update(UpdateAccountMessage message)
+        {
+            if (await _fileService.UpdateAccountAsync(message.Account))
+            {
+                var index = AccountList.IndexOf(AccountList.Where(x => x.Id == message.Account.Id).First());
+                AccountList.RemoveAt(index);
+                AccountList.Insert(index, message.Account);
+            }
+            else
+            {
+                //failed to update
             }
         }
 

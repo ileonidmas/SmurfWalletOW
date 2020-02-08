@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -64,16 +65,9 @@ namespace SmurfWalletOW.Service
 
         private bool StartGame(SecureString key, Account account)
         {
-
-
-            var settingsAreGood = _fileService.SetOverwatchSettingsToWindowedAsync().Result;
-
             var settings = _fileService.GetSettingsAsync().Result; 
             var wh = StartOverwatch(settings.OverwatchPath);
-            var finished = InsertCredentials(wh,account,key,settings,settingsAreGood);
-            //maximize after done
-            if (settingsAreGood)
-                SendKeys.SendWait("%{ENTER}");
+            var finished = InsertCredentials(wh,account,key,settings);
 
             return finished;
         }     
@@ -93,36 +87,39 @@ namespace SmurfWalletOW.Service
             return app.MainWindowHandle;
         }
 
-        private bool InsertCredentials(IntPtr wh,Account account,SecureString key, Settings settings,bool settingsState)
+        private bool InsertCredentials(IntPtr wh, Account account, SecureString key, Settings settings)
         {
             Native.SetForegroundWindow(wh);
 
-
-            if (settingsState) { 
-            Native.MoveWindow(wh, 0, 0, 720, 436, false);
-
             Color theColor = Color.FromArgb(255, 209, 209, 212);
-            Color pixel1, pixel2;
             Stopwatch sw = new Stopwatch();
             sw.Start();
-
+            bool loggedIn = false;
             do
             {
                 var img = GetScreenshot(wh);
-                pixel1 = img.GetPixel(319, 300);
-                pixel2 = img.GetPixel(400, 300);
+                int imgW = img.Width;
+                int imgH = img.Height;
+                int count = 0;
+                for (int z = 0; z < imgH; z++)
+                {
+                    for (int i = 0; i < imgW; i++)
+                    {
+                        Color pixelColor = img.GetPixel(i, z);
+                        if (pixelColor.Equals(theColor))
+                            count++;
+                    }
+                }
+                if (count > 100)
+                    loggedIn = !loggedIn;
                 if (sw.Elapsed > TimeSpan.FromMilliseconds(settings.LoadingTime * 1000))
                     break;
-            } while (!pixel1.Equals(theColor) || !pixel2.Equals(theColor));
+                Thread.Sleep(1);
+            } while (!loggedIn);
 
 
             sw.Stop();
-            }
-            else
-            {
-                Thread.Sleep(Convert.ToInt32(Math.Round(settings.LoadingTime * 1000)));
-            }
-            SendKeys.SendWait(account.Email);
+            SpecialSendKeys(account.Email);
             Thread.Sleep(750);
             SendKeys.SendWait("{TAB}");
             Thread.Sleep(750);
@@ -134,7 +131,7 @@ namespace SmurfWalletOW.Service
 
                 for (int i = 0; i < pw.Length; i++)
                 {
-                    SendKeys.SendWait(Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)).ToString());
+                    SpecialSendKeys(Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)).ToString());
                 }
             }
             finally
@@ -147,7 +144,11 @@ namespace SmurfWalletOW.Service
             return true;
         }
 
-
+        private void SpecialSendKeys(string line)
+        {
+            string txt = Regex.Replace(line, "[+^%~()]", "{$0}");
+            SendKeys.SendWait(txt);
+        }
 
 
         private Bitmap GetScreenshot(IntPtr hwnd)

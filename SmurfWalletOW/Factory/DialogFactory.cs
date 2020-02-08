@@ -20,6 +20,7 @@ namespace SmurfWalletOW.Factory
 
             SimpleIoc.Default.Register<DialogAboutViewModel>();
             SimpleIoc.Default.Register<DialogAccountViewModel>();
+            SimpleIoc.Default.Register<DialogAccountUpdateViewModel>();
             SimpleIoc.Default.Register<DialogEncryptionKeyViewModel>();
             SimpleIoc.Default.Register<DialogSettingsViewModel>();
             SimpleIoc.Default.Register<DialogYesNoViewModel>();
@@ -33,6 +34,10 @@ namespace SmurfWalletOW.Factory
                     return SimpleIoc.Default.GetInstance<DialogAboutViewModel>();
                 case DialogsEnum.DialogAccountView:
                     return SimpleIoc.Default.GetInstance<DialogAccountViewModel>();
+                case DialogsEnum.DialogAccountUpdateView:
+                    var dialogAccountUpdateView = SimpleIoc.Default.GetInstance<DialogAccountUpdateViewModel>();
+                    dialogAccountUpdateView.AccountId = message;
+                    return dialogAccountUpdateView;
                 case DialogsEnum.DialogEncryptionKey:
                     return SimpleIoc.Default.GetInstance<DialogEncryptionKeyViewModel>();
                 case DialogsEnum.DialogSettings:

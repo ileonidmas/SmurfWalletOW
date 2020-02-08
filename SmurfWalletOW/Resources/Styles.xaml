@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SmurfWalletOW.Resources">
+    <Style x:Key="OrangeButton" TargetType="Button">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="11px"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground"  Value="{StaticResource OverwatchWhiteColor}" />
+        <Setter Property="Background" Value="{StaticResource OverwatchOrangeColor}" />
+    </Style>
+    <Style x:Key="CustomButtonStyle" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="CustomSwitchButtonStyle"  TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Hooked}"
+                             Value="True">
+                <Setter Property="Foreground" Value="Goldenrod" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Hooked}"
+                             Value="False">
+                <Setter Property="Foreground" Value="White" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="14px"/>
+        <Setter Property="Height" Value="21px"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+    </Style>
+
+    <Style x:Key="BlackLabel" TargetType="Label">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="21px"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+    </Style>
+
+
+    <Style x:Key="BlackLabelLittle" TargetType="Label">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="11px"/>
+        <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+    </Style>
+
+    <Style x:Key="BlackCheckboxLittle" TargetType="CheckBox">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="14px"/>
+        <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
+        <Setter Property="VerticalContentAlignment"  Value="Center" />
+    </Style>
+</ResourceDictionary>
