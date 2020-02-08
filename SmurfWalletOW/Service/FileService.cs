@@ -19,7 +19,7 @@ namespace SmurfWalletOW.Service
         {
             return Task.Factory.StartNew(GetAccountList);
         }
-     
+
         public Task<bool> AddAccountAsync(Account account)
         {
             return Task.Factory.StartNew(() => Add(account));
@@ -49,6 +49,11 @@ namespace SmurfWalletOW.Service
             return Task.Factory.StartNew(() => SaveSettings(settings));
         }
 
+        public Task<bool> IsOverwatchFullscreenAsync()
+        {
+            return Task.Factory.StartNew(() => IsOverwatchFullscreen());
+        }
+
         //public Task<bool> SetOverwatchSettingsToWindowedAsync()
         //{
         //    return Task.Factory.StartNew(SetOverwatchSettingsToWindowed);
@@ -59,7 +64,7 @@ namespace SmurfWalletOW.Service
             _appSettingsService = appSettingsService;
         }
 
-      
+
 
         private List<Account> GetAccountList()
         {
@@ -140,6 +145,39 @@ namespace SmurfWalletOW.Service
             settings.LoadingTime = Convert.ToInt32(_appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultLoadingTime).Result);
             return settings;
         }
+
+        private bool IsOverwatchFullscreen(){
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + @"Documents\Overwatch\Settings\Settings_v0.ini";
+            if (!File.Exists(path))
+                return false;
+            var owSettings = File.ReadAllLines(path);
+            int startIndex = 0, stopIndex = 0;
+            bool fsw = false, fswe = false, wm = false, reachedRender = false;
+            for (int i = 0; i < owSettings.Length; i++)
+            {
+                if (!reachedRender)
+                {
+                    if (owSettings[i] == "[Render.13]")
+                        reachedRender = true;
+                    continue;
+                }
+
+                if (owSettings[i] == "")
+                {
+                    stopIndex = i;
+                    break;
+                }
+            }
+
+            if (!reachedRender)
+                return false;
+
+            if (owSettings[stopIndex - 1] == "WindowMode = \"0\"")
+                return true;
+            return false;
+
+        }
+
 
         private bool SetOverwatchSettingsToWindowed()
         {

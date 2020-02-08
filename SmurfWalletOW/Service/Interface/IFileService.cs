@@ -16,6 +16,7 @@ namespace SmurfWalletOW.Service.Interface
         Task<bool> AddAccountAsync(Account account);
         Task<Settings> GetSettingsAsync();
         Task<bool> SaveSettingsAsync(Settings settings);
+        Task<bool> IsOverwatchFullscreenAsync();
 
     }
 }

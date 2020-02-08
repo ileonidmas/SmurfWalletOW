@@ -91,6 +91,14 @@ namespace SmurfWalletOW.Service
         {
             Native.SetForegroundWindow(wh);
 
+            //check if full screen
+            var isFullScreen = _fileService.IsOverwatchFullscreenAsync().Result;
+            Thread.Sleep(2000);
+            if (isFullScreen)
+            {
+                SendKeys.SendWait("%{ENTER}");
+            }
+
             Color theColor = Color.FromArgb(255, 209, 209, 212);
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -141,6 +149,12 @@ namespace SmurfWalletOW.Service
 
             Thread.Sleep(750);
             SendKeys.SendWait("{ENTER}");
+
+            if (isFullScreen)
+            {
+                SendKeys.SendWait("%{ENTER}");
+            }
+
             return true;
         }
 
