@@ -108,12 +108,14 @@
     <Compile Include="Behavior\ClosingBehavior.cs" />
     <Compile Include="Behavior\DoubleClickBehavior.cs" />
     <Compile Include="Behavior\LoadingBehavior.cs" />
+    <Compile Include="Behavior\SelectionChangedBehavior.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\MultiValueConverter.cs" />
     <Compile Include="Converter\RatioConverter.cs" />
     <Compile Include="Enums\AppSettingsKeys.cs" />
     <Compile Include="Enums\DialogResults.cs" />
     <Compile Include="Enums\DialogsEnum.cs" />
+    <Compile Include="Enums\Region.cs" />
     <Compile Include="Factory\DialogFactory.cs" />
     <Compile Include="Factory\Interface\IDialogFactory.cs" />
     <Compile Include="Factory\Interface\IFactory.cs" />
@@ -134,7 +136,9 @@
     <Compile Include="Service\Interface\IEncryptionService.cs" />
     <Compile Include="Service\Interface\IFileService.cs" />
     <Compile Include="Service\Interface\IOverwatchService.cs" />
+    <Compile Include="Service\Interface\IRegionService.cs" />
     <Compile Include="Service\OverwatchService.cs" />
+    <Compile Include="Service\RegionService.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="ViewModel\AccountListViewModel.cs" />
     <Compile Include="ViewModel\DialogAboutViewModel.cs" />
@@ -146,6 +150,7 @@
     <Compile Include="ViewModel\DialogViewModelBase.cs" />
     <Compile Include="ViewModel\DialogYesNoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RegionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AccountItemView.xaml.cs">
       <DependentUpon>AccountItemView.xaml</DependentUpon>
@@ -164,6 +169,9 @@
     </Compile>
     <Compile Include="View\DialogSettings.xaml.cs">
       <DependentUpon>DialogSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegionView.xaml.cs">
+      <DependentUpon>RegionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wrapper\SecureStringWrapper.cs" />
     <Page Include="Resources\Colors.xaml">
@@ -236,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AccountListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RegionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

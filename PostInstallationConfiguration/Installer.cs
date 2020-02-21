@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace PostInstallationConfiguration
             base.Commit(savedState);
             //change link
             AddShortcutToDesktop();
-            Process.Start( this.Context.Parameters["targetDir"] + "VC_redist.x64.exe");
+            InstallTools();
         }
 
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand)]
@@ -44,10 +45,23 @@ namespace PostInstallationConfiguration
             base.Uninstall(savedState);
             //delete shortcut
             RemoveShortcut();
-            Process.Start(this.Context.Parameters["targetDir"] + "VC_redist.x64.exe");
+            
         }
 
+
+
         //private
+
+        public void InstallTools()
+        {
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\Dependencies\VC,redist.x64,amd64,14.24,bundle");
+            if (key == null)
+            {
+                Process.Start(this.Context.Parameters["targetDir"] + "VC_redist.x64.exe");
+            }
+                
+        }
+
 
         public void RemoveShortcut()
         {

@@ -23,4 +23,7 @@
     <DataTemplate DataType="{x:Type vm:DialogNotificationViewModel}">
         <v:DialogNotification/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:RegionViewModel}">
+        <v:RegionView/>
+    </DataTemplate>
 </ResourceDictionary>
