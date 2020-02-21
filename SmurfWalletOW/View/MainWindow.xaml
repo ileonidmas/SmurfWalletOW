@@ -41,7 +41,8 @@
     </controls:MetroWindow.RightWindowCommands>
 
 
-    <Grid >
-        <view:AccountListView />
+    <Grid>
+        <view:AccountListView/>
+        <view:RegionView VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
     </Grid>
 </controls:MetroWindow>

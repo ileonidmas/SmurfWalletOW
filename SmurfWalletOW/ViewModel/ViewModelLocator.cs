@@ -25,6 +25,7 @@ namespace SmurfWalletOW.ViewModel
             }
             else
             {
+                SimpleIoc.Default.Register<IRegionService, RegionService>();
                 SimpleIoc.Default.Register<IFileService, FileService>();
                 SimpleIoc.Default.Register<IAppSettingsService, AppSettingsService>();
                 SimpleIoc.Default.Register<IEncryptionService, EncryptionService>();
@@ -35,9 +36,7 @@ namespace SmurfWalletOW.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountListViewModel>();
-
-
-
+            SimpleIoc.Default.Register<RegionViewModel>();
             SimpleIoc.Default.Register<IDialogFactory, DialogFactory>();
 
         }
@@ -80,7 +79,10 @@ namespace SmurfWalletOW.ViewModel
         {
             get { return SimpleIoc.Default.GetInstance<DialogAboutViewModel>(); }
         }
-
+        public RegionViewModel RegionViewModel
+        {
+            get { return SimpleIoc.Default.GetInstance<RegionViewModel>(); }
+        }
 
     }
 }
