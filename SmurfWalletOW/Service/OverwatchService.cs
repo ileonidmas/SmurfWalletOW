@@ -117,7 +117,7 @@ namespace SmurfWalletOW.Service
                             count++;
                     }
                 }
-                if (count > 100)
+                if (count > 1000)
                     loggedIn = !loggedIn;
                 if (sw.Elapsed > TimeSpan.FromMilliseconds(settings.LoadingTime * 1000))
                     break;
