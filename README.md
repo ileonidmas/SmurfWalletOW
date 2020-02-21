@@ -22,3 +22,9 @@ NEW VERSION 1.2 !!!!!
 2) improved sign in functionality
 3) implemented edit method for entries
 4) implemented option to shutdown application upon login
+
+NEW VERSION 1.2.1 !!!!!
+
+1) fixed issue with sometimes failing login
+2) created a new feature for selection region
+3) fixed issue with c++ installer where it asks to install it every time
