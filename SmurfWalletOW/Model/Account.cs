@@ -12,6 +12,7 @@ namespace SmurfWalletOW.Model
         private string _displayName;
         private string _email;
         private string _password;
+        private string _btag;
         private bool _manualEncription;
         private string _id;
 
@@ -43,6 +44,12 @@ namespace SmurfWalletOW.Model
         {
             get => _password;
             set => Set(ref _password, value);
+        }
+
+        public string Btag
+        {
+            get => _btag;
+            set => Set(ref _btag, value);
         }
 
         public bool ManualEncryption

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using SmurfWalletOW.Enums;
 using SmurfWalletOW.Message;
 using SmurfWalletOW.Model;
@@ -30,10 +31,10 @@ namespace SmurfWalletOW.ViewModel
         private RelayCommand<object> _addAccountCommand;
 
         private RelayCommand _loadCommand;
-        private ObservableCollection<Account> _accountList = new ObservableCollection<Account>();
+        private ObservableCollection<AccountViewModel> _accountList = new ObservableCollection<AccountViewModel>();
 
 
-        public ObservableCollection<Account> AccountList
+        public ObservableCollection<AccountViewModel> AccountList
         {
             get => _accountList;
             set => Set(ref _accountList, value);
@@ -84,9 +85,14 @@ namespace SmurfWalletOW.ViewModel
         private async void Load()
         {
             var list = await _fileService.GetAccountsAsync();
-            foreach(var account in list)
+
+            foreach (var account in list)
             {
-                AccountList.Add(account);
+
+                var accountVm = SimpleIoc.Default.GetInstance<AccountViewModel>(account.Id);
+                accountVm.Account = account;
+                accountVm.LoadCommand.Execute("");                
+                AccountList.Add(accountVm);
             }
         }
 
@@ -96,14 +102,17 @@ namespace SmurfWalletOW.ViewModel
         }
         private void UpdateAccount(object[] parameter)
         {
-            _dialogService.ShowDialog(DialogsEnum.DialogAccountUpdateView, parameter[1] as Window, (parameter[0] as Account).Id);
+            _dialogService.ShowDialog(DialogsEnum.DialogAccountUpdateView, parameter[1] as Window, (parameter[0] as AccountViewModel).Account.Id);
         }
 
         private async void SaveAccount(SaveAccountMessage message)
         {
             if (await _fileService.AddAccountAsync(message.Account))
             {
-                AccountList.Add(message.Account);
+                var accountVm = SimpleIoc.Default.GetInstance<AccountViewModel>(message.Account.Id);
+                accountVm.Account = message.Account;
+                accountVm.LoadCommand.Execute("");
+                AccountList.Add(accountVm);
             }
             else
             {
@@ -115,9 +124,12 @@ namespace SmurfWalletOW.ViewModel
         {
             if (await _fileService.UpdateAccountAsync(message.Account))
             {
-                var index = AccountList.IndexOf(AccountList.Where(x => x.Id == message.Account.Id).First());
+                var index = AccountList.IndexOf(AccountList.Where(x => x.Account.Id == message.Account.Id).First());
                 AccountList.RemoveAt(index);
-                AccountList.Insert(index, message.Account);
+                var accountVm = SimpleIoc.Default.GetInstance<AccountViewModel>(message.Account.Id);
+                accountVm.Account = message.Account;
+                accountVm.LoadCommand.Execute("");
+                AccountList.Insert(index, accountVm);
             }
             else
             {
@@ -127,11 +139,11 @@ namespace SmurfWalletOW.ViewModel
 
         private async void DeleteAccount(object[] parameters)
         {
-            var account = parameters[0] as Account;
+            var account = parameters[0] as AccountViewModel;
             DialogResult result = _dialogService.ShowDialog(DialogsEnum.DialogYesNo, parameters[1] as Window, "Are you sure you want to delete this entry?");
             if (result == DialogResult.Yes)
             {
-                if (await _fileService.DeleteAccountAsync(account))
+                if (await _fileService.DeleteAccountAsync(account.Account))
                 {
                     AccountList.Remove(account);
                 }
@@ -144,15 +156,15 @@ namespace SmurfWalletOW.ViewModel
 
         private async void Play(object[] parameters)
         {
-            var account = parameters[0] as Account;
-            if (account.ManualEncryption)
+            var account = parameters[0] as AccountViewModel;
+            if (account.Account.ManualEncryption)
             {
-                _selectedAccount = account;
+                _selectedAccount = account.Account;
                 DialogResult result = _dialogService.ShowDialog(DialogsEnum.DialogEncryptionKey, parameters[1] as Window);                
             }
             else
             {
-                await _overwatchService.StartGameAsync(null, account);
+                await _overwatchService.StartGameAsync(null, account.Account);
             }
 
             var settings = await _fileService.GetSettingsAsync();

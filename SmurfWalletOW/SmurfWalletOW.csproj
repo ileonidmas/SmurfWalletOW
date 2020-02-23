@@ -124,6 +124,7 @@
     <Compile Include="Message\UpdateAccountMessage.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Service\AppSettingsService.cs" />
     <Compile Include="Service\DialogService.cs" />
@@ -135,12 +136,15 @@
     <Compile Include="Service\Interface\IDiscordService.cs" />
     <Compile Include="Service\Interface\IEncryptionService.cs" />
     <Compile Include="Service\Interface\IFileService.cs" />
+    <Compile Include="Service\Interface\IOverwatchApiService.cs" />
     <Compile Include="Service\Interface\IOverwatchService.cs" />
     <Compile Include="Service\Interface\IRegionService.cs" />
+    <Compile Include="Service\OverwatchApiService.cs" />
     <Compile Include="Service\OverwatchService.cs" />
     <Compile Include="Service\RegionService.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="ViewModel\AccountListViewModel.cs" />
+    <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\DialogAboutViewModel.cs" />
     <Compile Include="ViewModel\DialogAccountUpdateViewModel.cs" />
     <Compile Include="ViewModel\DialogAccountViewModel.cs" />
@@ -306,6 +310,18 @@
     <Content Include="Icons\wallet.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Icons\dps.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\heal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\tank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="View\heal.png" />
+    <Resource Include="View\dps.png" />
+    <Resource Include="View\tank.png" />
     <Resource Include="wallet.ico" />
   </ItemGroup>
   <ItemGroup>

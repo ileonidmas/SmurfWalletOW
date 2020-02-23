@@ -7,20 +7,33 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="75" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type=model:Account, IsDesignTimeCreatable=False}">
+             d:DataContext="{Binding AccountViewModel, Source={StaticResource Locator}}">
     <Border BorderBrush="{StaticResource OverwatchWhiteColor}" BorderThickness="2" Margin="5">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="2*" />
+                <RowDefinition Height="2.3*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
             <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.5*" />
             <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.5*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding DisplayName}" Style="{StaticResource BlackLabel}"/>
-            <Button Grid.Row="1" Grid.Column="0"  Style="{StaticResource OrangeButton}" Margin="2" Command="{Binding DataContext.PlayCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+            <Label Grid.Row="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Top" Content="{Binding Account.DisplayName}" Style="{StaticResource BlackLabel}"/>
+
+            <Image Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="tank.png" />
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding TankSr}" Style="{StaticResource BlackLabelLittle}"  />
+            <Image Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="dps.png" />
+            <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"  Content="{Binding DpsSr}" Style="{StaticResource BlackLabelLittle}" />
+            <Image Grid.Row="1" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="heal.png" />
+            <Label Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding HealSr}" Style="{StaticResource BlackLabelLittle}"  />
+        
+        
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  Style="{StaticResource OrangeButton}" Margin="2" Command="{Binding DataContext.PlayCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
                 <iconPacks:PackIconOcticons Kind="TriangleRight" />
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MultiValueConverter}" >
@@ -29,7 +42,7 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
-            <Button Grid.Row="1" Grid.Column="1"  Margin="2" Style="{StaticResource OrangeButton}" Command="{Binding DataContext.UpdateAccountCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+            <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"  Margin="2" Style="{StaticResource OrangeButton}" Command="{Binding DataContext.UpdateAccountCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
                 <iconPacks:PackIconOcticons Kind="Grabber" />
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MultiValueConverter}" >
@@ -38,7 +51,7 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
-            <Button Grid.Row="1" Grid.Column="2"  Margin="2" Style="{StaticResource OrangeButton}" Command="{Binding DataContext.DeleteAccountCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+            <Button Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"  Margin="2" Style="{StaticResource OrangeButton}" Command="{Binding DataContext.DeleteAccountCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}">
                 <iconPacks:PackIconOcticons Kind="Trashcan" />
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MultiValueConverter}" >
@@ -47,8 +60,7 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
-           
-
+            
         </Grid>
     </Border>
 </UserControl>

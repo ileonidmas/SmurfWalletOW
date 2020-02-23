@@ -43,7 +43,7 @@
     <Style x:Key="BlackLabel" TargetType="Label">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="FontFamily" Value="Verdana"/>
-        <Setter Property="FontSize" Value="21px"/>
+        <Setter Property="FontSize" Value="15px"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
     </Style>
@@ -52,7 +52,7 @@
     <Style x:Key="BlackLabelLittle" TargetType="Label">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="FontFamily" Value="Verdana"/>
-        <Setter Property="FontSize" Value="11px"/>
+        <Setter Property="FontSize" Value="9px"/>
         <Setter Property="Foreground"  Value="{StaticResource OverwatchBlackColor}" />
     </Style>
 

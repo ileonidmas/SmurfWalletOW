@@ -1,19 +1,17 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmurfWalletOW.Enums;
 using SmurfWalletOW.Model;
 using SmurfWalletOW.Service.Interface;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Windows;
 using System.Windows.Interop;
-using static SmurfWalletOW.Enums.DialogResults;
 
 namespace SmurfWalletOW.ViewModel
 {
@@ -80,8 +78,8 @@ namespace SmurfWalletOW.ViewModel
             _openAboutCommand = new RelayCommand<object>((parameter) => OpenAbout(parameter));
             _hookCommand = new RelayCommand<object>((parameter) => Hook(parameter));
             _closeCommand = new RelayCommand<object[]>((parameter) => Close(parameter));
-
         }
+
 
         private void OpenSettings(object window)
         {

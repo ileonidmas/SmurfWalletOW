@@ -6,7 +6,7 @@
              xmlns:behaviors="clr-namespace:SmurfWalletOW.Behavior"
              mc:Ignorable="d" 
              d:DataContext="{Binding DialogAccountViewModel, Source={StaticResource Locator}}"
-             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.24' }" 
+             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.27' }" 
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource RatioConverter}, ConverterParameter='0.12' }" >
     <Grid behaviors:LoadingBehavior.Command="{Binding LoadCommand}">
         <Grid.ColumnDefinitions>
@@ -24,17 +24,22 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Display Name" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Account.DisplayName}"  />
         <Label Grid.Row="2" Grid.ColumnSpan="2" Content="Email" HorizontalAlignment="Left"   />
         <TextBox Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Account.Email}"    />
-        <Label Grid.Row="4" Grid.ColumnSpan="2" Content="Password" HorizontalAlignment="Left"/>
-        <PasswordBox Grid.Row="5" Grid.ColumnSpan="2" Name="password"  />
-        <CheckBox Grid.Row="6" Grid.ColumnSpan="2" Content="Manual Encryption" IsChecked="{Binding Account.ManualEncryption}"   />
-        <Label Grid.Row="7" Grid.ColumnSpan="2" Content="Encryption Key" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
-        <PasswordBox Grid.Row="8" Grid.ColumnSpan="2" Name="masterKey" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
-        <Button Grid.Row="9"  Content="Set" Command="{Binding SetCommand}" Style="{StaticResource OrangeButton}">
+        <Label Grid.Row="4" Grid.ColumnSpan="2" Content="Battletag" HorizontalAlignment="Left"   />
+        <TextBox Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Account.Btag}"    />
+        <Label Grid.Row="6" Grid.ColumnSpan="2" Content="Password" HorizontalAlignment="Left"/>
+
+        <PasswordBox Grid.Row="7" Grid.ColumnSpan="2" Name="password"  />
+        <CheckBox Grid.Row="8" Grid.ColumnSpan="2" Content="Manual Encryption" IsChecked="{Binding Account.ManualEncryption}"   />
+        <Label Grid.Row="9" Grid.ColumnSpan="2" Content="Encryption Key" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
+        <PasswordBox Grid.Row="10" Grid.ColumnSpan="2" Name="masterKey" Visibility="{Binding Account.ManualEncryption, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"  />
+        <Button Grid.Row="11"  Content="Set" Command="{Binding SetCommand}" Style="{StaticResource OrangeButton}">
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource MultiValueConverter}">
                     <Binding ElementName="masterKey" />
@@ -43,7 +48,7 @@
                 </MultiBinding>
             </Button.CommandParameter>
         </Button>
-        <Button Grid.Row="9" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Style="{StaticResource OrangeButton}"/>
+        <Button Grid.Row="12" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Style="{StaticResource OrangeButton}"/>
 
     </Grid>
 </UserControl>

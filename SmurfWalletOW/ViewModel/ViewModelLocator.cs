@@ -32,10 +32,12 @@ namespace SmurfWalletOW.ViewModel
                 SimpleIoc.Default.Register<IDialogService, DialogService>();
                 SimpleIoc.Default.Register<IOverwatchService, OverwatchService>();
                 SimpleIoc.Default.Register<IDiscordService, DiscordService>();
+                SimpleIoc.Default.Register<IOverwatchApiService, OverwatchApiService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountListViewModel>();
+            SimpleIoc.Default.Register<AccountViewModel>();
             SimpleIoc.Default.Register<RegionViewModel>();
             SimpleIoc.Default.Register<IDialogFactory, DialogFactory>();
 
@@ -82,6 +84,11 @@ namespace SmurfWalletOW.ViewModel
         public RegionViewModel RegionViewModel
         {
             get { return SimpleIoc.Default.GetInstance<RegionViewModel>(); }
+        }
+
+        public AccountViewModel AccountViewModel
+        {
+            get { return SimpleIoc.Default.GetInstance<AccountViewModel>(); }
         }
 
     }
