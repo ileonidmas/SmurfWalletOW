@@ -28,3 +28,7 @@ NEW VERSION 1.2.1 !!!!!
 1) fixed issue with sometimes failing login
 2) created a new feature for selection region
 3) fixed issue with c++ installer where it asks to install it every time
+
+NEW VERSION 1.2.2 !!!!!
+
+1) new feature that allows to see current rank if battletag is provided
