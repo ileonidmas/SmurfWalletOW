@@ -39,6 +39,8 @@ namespace SmurfWalletOW.Service
                 if (response.IsSuccessStatusCode)
                 {
                    var data = response.Content.ReadAsStringAsync().Result;
+                    if (data == null)
+                        return profile;
                    profile = JsonConvert.DeserializeObject<Profile>(data);
                 }
             }
