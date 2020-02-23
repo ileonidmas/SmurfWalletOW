@@ -58,6 +58,8 @@ namespace SmurfWalletOW.ViewModel
             var profile = await _overwatchApiService.GetProfileAsync(Account.Btag);
             if (profile != null)
             {
+                if (profile.ratings == null)
+                    return;
                 TankSr = profile.ratings[0].level;
                 DpsSr = profile.ratings[1].level;
                 HealSr = profile.ratings[2].level;
