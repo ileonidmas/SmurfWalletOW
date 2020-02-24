@@ -48,7 +48,7 @@ namespace SmurfWalletOW.Service
             using (var client = new WebClient())
             {
                 var temp = client.DownloadString("https://raw.githubusercontent.com/ileonidmas/SmurfWalletOW/master/SmurfWalletOW/Properties/AssemblyInfo.cs");
-                var versionString = temp.Substring(temp.Length - 11, 7);
+                var versionString = temp.Substring(temp.Length - 20, 20).Split('"')[1];
                 Version newVersion = new Version(versionString);
                 var currrentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
