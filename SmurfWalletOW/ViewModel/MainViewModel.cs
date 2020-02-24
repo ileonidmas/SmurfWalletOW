@@ -78,6 +78,7 @@ namespace SmurfWalletOW.ViewModel
             _openAboutCommand = new RelayCommand<object>((parameter) => OpenAbout(parameter));
             _hookCommand = new RelayCommand<object>((parameter) => Hook(parameter));
             _closeCommand = new RelayCommand<object[]>((parameter) => Close(parameter));
+
         }
 
 

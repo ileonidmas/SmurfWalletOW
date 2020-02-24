@@ -33,6 +33,7 @@ namespace SmurfWalletOW.ViewModel
                 SimpleIoc.Default.Register<IOverwatchService, OverwatchService>();
                 SimpleIoc.Default.Register<IDiscordService, DiscordService>();
                 SimpleIoc.Default.Register<IOverwatchApiService, OverwatchApiService>();
+                SimpleIoc.Default.Register<IUpdateService, UpdateService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();

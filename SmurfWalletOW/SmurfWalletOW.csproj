@@ -139,9 +139,11 @@
     <Compile Include="Service\Interface\IOverwatchApiService.cs" />
     <Compile Include="Service\Interface\IOverwatchService.cs" />
     <Compile Include="Service\Interface\IRegionService.cs" />
+    <Compile Include="Service\Interface\IUpdateService.cs" />
     <Compile Include="Service\OverwatchApiService.cs" />
     <Compile Include="Service\OverwatchService.cs" />
     <Compile Include="Service\RegionService.cs" />
+    <Compile Include="Service\UpdateService.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="ViewModel\AccountListViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />

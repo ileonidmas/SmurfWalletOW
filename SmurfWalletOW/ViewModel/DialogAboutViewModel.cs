@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using SmurfWalletOW.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
@@ -7,12 +8,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SmurfWalletOW.ViewModel
 {
     public class DialogAboutViewModel : DialogViewModelBase
     {
         private RelayCommand<Uri> _redirectCommand;
+        private RelayCommand<object> _updateCommand;
+
+
+        private readonly IUpdateService _updateService;
 
         public RelayCommand<Uri> RedirectCommand
         {
@@ -20,37 +26,65 @@ namespace SmurfWalletOW.ViewModel
             set => Set(ref _redirectCommand, value);
         }
 
-        string _appVersion;
 
-        public string AppVersion
+        public RelayCommand<object> UpdateCommand
+        {
+            get => _updateCommand;
+            set => Set(ref _updateCommand, value);
+        }
+
+        private RelayCommand _loadCommand;
+        public RelayCommand LoadCommand
+        {
+            get { return _loadCommand; }
+            set { _loadCommand = value; }
+        }
+
+
+        Version _appVersion;
+
+        public Version AppVersion
         {
             get => _appVersion;
             set => Set(ref _appVersion, value);
         }
 
-        public DialogAboutViewModel()
+        bool _newVersionAvaiable;
+
+        public bool NewVersionAvaiable
+        {
+            get => _newVersionAvaiable;
+            set => Set(ref _newVersionAvaiable, value);
+        }
+
+        public DialogAboutViewModel(IUpdateService updateService)
         {
             Title = "About";
-            SetVersion();
+
+            _updateService = updateService;
             _redirectCommand = new RelayCommand<Uri>((parameter) => Redirect(parameter));
+            _updateCommand = new RelayCommand<object>((parameter) => Update(parameter));
+            _loadCommand = new RelayCommand(Load);
+
+            var result=_updateService.NewVersionAvaialbeAsync().Result;
+        }
+
+        private async void Load()
+        {
+            AppVersion = await _updateService.GetCurrentVersionAsync();
+            NewVersionAvaiable = await _updateService.NewVersionAvaialbeAsync();
+        }
+
+        private async void Update(object parameter)
+        {
+            await _updateService.UpdateAsync();
+            Application.Current.Shutdown();
         }
 
         private void Redirect(Uri uri)
         {
             Process.Start(new ProcessStartInfo(uri.AbsoluteUri));
         }
-        private void SetVersion()
-        {
-            try
-            {
-                var version = ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                _appVersion = string.Format("Version {0}.{1}.{2}", version.Major, version.Minor, version.Build);
-            }
-            catch (Exception)
-            {
-                var version = Assembly.GetExecutingAssembly().GetName().Version;
-                _appVersion = string.Format("Version {0}.{1}.{2}", version.Major, version.Minor, version.Build);
-            }
-        }
+
     }
 }
