@@ -21,12 +21,13 @@ namespace SmurfWalletOW.Service
         private IntPtr whook;
         private IFileService _fileService;
         private IEncryptionService _encryptionService;
+        private IRegionService _regionService;
 
-        public OverwatchService(IEncryptionService encryptionService, IFileService fileService)
+        public OverwatchService(IEncryptionService encryptionService, IFileService fileService, IRegionService regionService)
         {
             _encryptionService = encryptionService;
-            _fileService = fileService; 
-           
+            _fileService = fileService;
+            _regionService = regionService;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -65,16 +66,30 @@ namespace SmurfWalletOW.Service
 
         private bool StartGame(SecureString key, Account account)
         {
-            var settings = _fileService.GetSettingsAsync().Result; 
-            var wh = StartOverwatch(settings.OverwatchPath);
-            var finished = InsertCredentials(wh,account,key,settings);
+            var settings = _fileService.GetSettingsAsync().Result;
+            var region = _regionService.GetRegionAsync().Result;
+            IntPtr wh = IntPtr.Zero;
+            if (region != Enums.Region.PTR)
+            {
+                wh = StartOverwatch(settings.OverwatchPath);
+            }
+            else
+            {
+                wh = StartOverwatch(settings.PtrPath, true);
+            }
+
+            var finished = InsertCredentials(wh, account, key, settings);
             return finished;
         }     
 
-        private IntPtr StartOverwatch(string path)
+        private IntPtr StartOverwatch(string path, bool ptr= false)
         {
             app = new Process();
             app.StartInfo.FileName = path;
+            if(ptr)
+                app.StartInfo.Arguments = "--BNetServer=test.actual.battle.net:1119 --cluster=PTR -uid prometheus_test";
+
+
             app.Start();
             app.PriorityClass = ProcessPriorityClass.High;
 

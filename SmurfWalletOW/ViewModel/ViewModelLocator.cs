@@ -40,6 +40,7 @@ namespace SmurfWalletOW.ViewModel
             SimpleIoc.Default.Register<AccountListViewModel>();
             SimpleIoc.Default.Register<AccountViewModel>();
             SimpleIoc.Default.Register<RegionViewModel>();
+            SimpleIoc.Default.Register<UpdateViewModel>();
             SimpleIoc.Default.Register<IDialogFactory, DialogFactory>();
 
         }
@@ -85,6 +86,10 @@ namespace SmurfWalletOW.ViewModel
         public RegionViewModel RegionViewModel
         {
             get { return SimpleIoc.Default.GetInstance<RegionViewModel>(); }
+        }
+        public UpdateViewModel UpdateViewModel
+        {
+            get { return SimpleIoc.Default.GetInstance<UpdateViewModel>(); }
         }
 
         public AccountViewModel AccountViewModel

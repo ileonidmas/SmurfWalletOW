@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="Region:" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <ComboBox Grid.Column="1" ItemsSource="{Binding Regions}" SelectedItem="{Binding SelectedRegion}" behaviors:SelectionChangedBehavior.Command="{Binding ChangeRegionCommand}" HorizontalAlignment="Left"  VerticalAlignment="Bottom"  />
-    </Grid>
+        <Label Grid.Column="0" Content="Region:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding Regions}" SelectedItem="{Binding SelectedRegion}" behaviors:SelectionChangedBehavior.Command="{Binding ChangeRegionCommand}" HorizontalAlignment="Left"  VerticalAlignment="Center"  />
+        </Grid>
 </UserControl>

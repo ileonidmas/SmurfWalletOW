@@ -142,6 +142,7 @@ namespace SmurfWalletOW.Service
         {
             Settings settings = new Settings();
             settings.OverwatchPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultOverwatchPath).Result;
+            settings.PtrPath = _appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultPtrPath).Result;
             settings.LoadingTime = Convert.ToInt32(_appSettingsService.GetKeyAsync(AppSettingsKeys.DefaultLoadingTime).Result);
             return settings;
         }

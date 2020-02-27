@@ -15,7 +15,6 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -39,6 +38,6 @@
         <Label  Grid.Row="3" Grid.Column="0"   Content="Version" FontSize="30"/>
         <Label  Grid.Row="3" Grid.Column="1"   Content="{Binding AppVersion}" FontSize="30"/>
         
-        <Button Grid.Row="4" Grid.Column="0"  Content="Update" Command="{Binding UpdateCommand}" IsEnabled="{Binding NewVersionAvaiable}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Style="{StaticResource OrangeButton}"/>
+        
     </Grid>
 </UserControl>

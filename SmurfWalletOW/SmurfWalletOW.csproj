@@ -157,6 +157,7 @@
     <Compile Include="ViewModel\DialogYesNoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RegionViewModel.cs" />
+    <Compile Include="ViewModel\UpdateViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AccountItemView.xaml.cs">
       <DependentUpon>AccountItemView.xaml</DependentUpon>
@@ -178,6 +179,9 @@
     </Compile>
     <Compile Include="View\RegionView.xaml.cs">
       <DependentUpon>RegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateView.xaml.cs">
+      <DependentUpon>UpdateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wrapper\SecureStringWrapper.cs" />
     <Page Include="Resources\Colors.xaml">
@@ -254,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

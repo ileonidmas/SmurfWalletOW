@@ -38,6 +38,8 @@ namespace SmurfWalletOW.Service
                             return Region.EU;
                         case "KR":
                             return Region.KR;
+                        case "XX":
+                            return Region.PTR;
                     }
                 }
             }
@@ -49,12 +51,17 @@ namespace SmurfWalletOW.Service
 
         public bool SetRegion(Region region)
         {
+            string regionString;
+            if (region != Region.PTR)
+                regionString = region.ToString();
+            else
+                regionString = "XX";
             try
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Blizzard Entertainment\Battle.net\Launch Options\Pro", true);
                 if (key != null)
                 {
-                    key.SetValue("REGION", region.ToString());
+                    key.SetValue("REGION", regionString);
                 }
             }
             catch (Exception ex)

@@ -9,6 +9,7 @@ namespace SmurfWalletOW.Enums
     public static class AppSettingsKeys
     {
         public const string DefaultOverwatchPath = "DefaultOverwatchPath";
+        public const string DefaultPtrPath = "DefaultPtrPath";
         public const string SettingsPath = "SettingsPath";
         public const string AccountsPath = "AccountsPath";
         public const string DefaultLoadingTime = "DefaultLoadingTime";

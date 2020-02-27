@@ -10,6 +10,7 @@ namespace SmurfWalletOW.Enums
     {
         US,
         EU,
-        KR
+        KR,
+        PTR
     }
 }

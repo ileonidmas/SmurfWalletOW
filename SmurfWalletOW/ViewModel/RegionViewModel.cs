@@ -55,14 +55,13 @@ namespace SmurfWalletOW.ViewModel
 
         private async void Load()
         {
-            SelectedRegion = await _regionService.GetRegionAsync();           
+            SelectedRegion = await _regionService.GetRegionAsync();
         }
 
         private async void ChangeRegion()
         {
             await _regionService.SetRegionAsync(SelectedRegion);
         }
-
 
     }
 }

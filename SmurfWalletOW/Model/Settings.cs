@@ -8,7 +8,8 @@ namespace SmurfWalletOW.Model
 {
     public class Settings : ModelBase
     {
-        private string _overwatchPath; 
+        private string _overwatchPath;
+        private string _ptrPath;
         private string _discordUsername;
         private double _loadingTime;
         private bool _exitAfterLogin;
@@ -20,6 +21,12 @@ namespace SmurfWalletOW.Model
         {
             get => _overwatchPath;
             set => Set(ref _overwatchPath, value);
+        }
+
+        public string PtrPath
+        {
+            get => _ptrPath;
+            set => Set(ref _ptrPath, value);
         }
 
         public double LoadingTime

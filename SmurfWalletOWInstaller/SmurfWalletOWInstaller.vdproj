@@ -286,25 +286,25 @@
         "Entry"
         {
         "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
-        "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
         "OwnerKey" = "8:_D0EAB87BA323D394B3A3ABA67565F502"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
-        "OwnerKey" = "8:_68C5D8151C26FE2E8C7C99CF6E28FAAF"
+        "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
         "OwnerKey" = "8:_2D718DED064CFA2814423D5E397448DA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
+        "OwnerKey" = "8:_68C5D8151C26FE2E8C7C99CF6E28FAAF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1324,12 +1324,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_092BD3AFEA25057AF17473FC1F66B0CC"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1397,6 +1391,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D0EAB87BA323D394B3A3ABA67565F502"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -6899,15 +6899,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SmurfWalletOW"
-        "ProductCode" = "8:{438E3EA3-088F-45D9-921D-A7CA9821E39F}"
-        "PackageCode" = "8:{64B3911B-3F1A-4772-A40C-56849BD27052}"
+        "ProductCode" = "8:{8EAE00E9-5251-4236-B25A-41405B7BA6E2}"
+        "PackageCode" = "8:{04921C74-77EB-4295-9B38-73A553092D90}"
         "UpgradeCode" = "8:{0ABD3B65-A55A-49F6-A7D8-22CF350AC019}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.6"
+        "ProductVersion" = "8:1.2.7"
         "Manufacturer" = "8:Imaleo"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

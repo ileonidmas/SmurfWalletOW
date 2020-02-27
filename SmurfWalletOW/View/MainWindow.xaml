@@ -17,10 +17,9 @@
 
         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource RatioConverter}, ConverterParameter='0.5' }" 
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource RatioConverter}, ConverterParameter='0.2' }" 
-      
-        ShowMinButton="False"
+
         ShowMaxRestoreButton="False"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
     behaviors:ClosingBehavior.Command="{Binding CloseCommand}" 
     behaviors:ClosingBehavior.CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
@@ -42,7 +41,16 @@
 
 
     <Grid>
-        <view:AccountListView/>
-        <view:RegionView VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <view:AccountListView Grid.Row="0" Grid.ColumnSpan="2"/>
+        <view:RegionView Grid.Row="1" Grid.Column="0" />
+        <view:UpdateView Grid.Row="1" Grid.Column="1"  />
     </Grid>
 </controls:MetroWindow>

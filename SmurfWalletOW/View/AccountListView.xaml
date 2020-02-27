@@ -27,7 +27,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <view:AccountItemView Width="{Binding ActualWidth, ElementName=parentElementName, Converter={StaticResource RatioConverter}, ConverterParameter='0.5'}" Height="{Binding ActualHeight, ElementName=parentElementName, Converter={StaticResource RatioConverter}, ConverterParameter='0.22'}"/>
+                        <view:AccountItemView Width="{Binding ActualWidth, ElementName=parentElementName, Converter={StaticResource RatioConverter}, ConverterParameter='0.5'}" Height="{Binding ActualHeight, ElementName=parentElementName, Converter={StaticResource RatioConverter}, ConverterParameter='0.25'}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

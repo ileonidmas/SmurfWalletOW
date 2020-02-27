@@ -26,4 +26,7 @@
     <DataTemplate DataType="{x:Type vm:RegionViewModel}">
         <v:RegionView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UpdateViewModel}">
+        <v:UpdateView/>
+    </DataTemplate>
 </ResourceDictionary>

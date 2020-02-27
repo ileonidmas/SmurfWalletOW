@@ -22,26 +22,29 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Content="Overwatch path"/>
-
         <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Settings.OverwatchPath}" Margin="1" IsReadOnly="True"  behaviors:DoubleClickBehavior.Command="{Binding UpdateOverwatchCommand}" />
 
+        <Label Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Content="Overwatch path (PTR)"/>
+        <TextBox Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Settings.PtrPath}" Margin="1" IsReadOnly="True"  behaviors:DoubleClickBehavior.Command="{Binding UpdatePtrPathCommand}" />
+
         <!--<Button Grid.Row="0"  Grid.Column="2"  Content="Set" Command="{Binding UpdateOverwatchCommand}" />-->
-        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Loading time threshold (seconds)"/>
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.LoadingTime}" Margin="1" TextAlignment="Center"/>
-        <Label Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Close application after log in"/>
-        <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Settings.ExitAfterLogin}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord name tag (Player#1234)"/>
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Settings.DiscordUsername}" Margin="1" TextAlignment="Center"/>
-        <Label Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord invite link"/>
-        <TextBlock Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">           
+        <Label Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Loading time threshold (seconds)"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Settings.LoadingTime}" Margin="1" TextAlignment="Center"/>
+        <Label Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Close application after log in"/>
+        <CheckBox Grid.Row="5" Grid.Column="2" IsChecked="{Binding Settings.ExitAfterLogin}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord name tag (Player#1234)"/>
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Settings.DiscordUsername}" Margin="1" TextAlignment="Center"/>
+        <Label Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Discord invite link"/>
+        <TextBlock Grid.Row="7" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">           
             <Hyperlink  NavigateUri="https://discord.gg/VGCs3G4 "  Command="{Binding RedirectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}">
                      https://discord.gg/VGCs3G4  
             </Hyperlink>
         </TextBlock>
-        <Button Grid.Row="6"  Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Style="{StaticResource OrangeButton}" />
-        <Button Grid.Row="6" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Style="{StaticResource OrangeButton}" />
+        <Button Grid.Row="8"  Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Style="{StaticResource OrangeButton}" />
+        <Button Grid.Row="8" Grid.Column="1"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Style="{StaticResource OrangeButton}" />
         
 
     </Grid>

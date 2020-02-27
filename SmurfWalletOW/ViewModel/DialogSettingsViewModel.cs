@@ -22,6 +22,7 @@ namespace SmurfWalletOW.ViewModel
 
         private Settings _settings;
         private RelayCommand _updateOverwatchPathCommand;
+        private RelayCommand _updatePtrPathCommand;
         private RelayCommand<Uri> _redirectCommand;
         private RelayCommand<Window> _saveCommand;
         private RelayCommand<Window> _cancelCommand;
@@ -62,13 +63,19 @@ namespace SmurfWalletOW.ViewModel
             get => _updateOverwatchPathCommand;
             set => Set(ref _updateOverwatchPathCommand, value);
         }
+        public RelayCommand UpdatePtrPathCommand
+        {
+            get => _updatePtrPathCommand;
+            set => Set(ref _updatePtrPathCommand, value);
+        }
 
         public DialogSettingsViewModel(IFileService fileService)
         {
             Title = "Settings";
             _fileService = fileService;
 
-            _updateOverwatchPathCommand = new RelayCommand(UpdateOverwatchPath);
+            _updateOverwatchPathCommand = new RelayCommand(UpdateOverwatchPath); 
+            _updatePtrPathCommand = new RelayCommand(UpdatePtrPath);
             _saveCommand = new RelayCommand<Window>((parameter)=>SaveSettings(parameter));
             _cancelCommand = new RelayCommand<Window>((parameter) => Cancel(parameter)); 
             _loadCommand = new RelayCommand(Load); 
@@ -105,6 +112,20 @@ namespace SmurfWalletOW.ViewModel
             {
                 string res = fileDialog.FileName;
                 Settings.OverwatchPath = res;                
+            }
+        }
+
+        private void UpdatePtrPath()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Exe Files (.exe)|*.exe";
+
+            //Show the dialog to the user
+            var result = fileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string res = fileDialog.FileName;
+                Settings.PtrPath = res;
             }
         }
     }
