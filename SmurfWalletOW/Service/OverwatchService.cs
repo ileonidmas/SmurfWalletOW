@@ -2,16 +2,11 @@
 using SmurfWalletOW.Service.Interface;
 using SmurfWalletOW.Util;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Interop;
 
 namespace SmurfWalletOW.Service
 {
@@ -22,12 +17,14 @@ namespace SmurfWalletOW.Service
         private IFileService _fileService;
         private IEncryptionService _encryptionService;
         private IRegionService _regionService;
+        private IOverwatchInteractionService _overwatchInteractionService;
 
-        public OverwatchService(IEncryptionService encryptionService, IFileService fileService, IRegionService regionService)
+        public OverwatchService(IEncryptionService encryptionService, IFileService fileService, IRegionService regionService, IOverwatchInteractionService overwatchInteractionService)
         {
             _encryptionService = encryptionService;
             _fileService = fileService;
             _regionService = regionService;
+            _overwatchInteractionService = overwatchInteractionService;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -60,7 +57,7 @@ namespace SmurfWalletOW.Service
             whook = IntPtr.Zero;
         }
         public Task<bool> StartGameAsync(SecureString key, Account account)
-        {           
+        {
             return Task.Factory.StartNew(() => StartGame(key, account));
         }
 
@@ -80,13 +77,13 @@ namespace SmurfWalletOW.Service
 
             var finished = InsertCredentials(wh, account, key, settings);
             return finished;
-        }     
+        }
 
-        private IntPtr StartOverwatch(string path, bool ptr= false)
+        private IntPtr StartOverwatch(string path, bool ptr = false)
         {
             app = new Process();
             app.StartInfo.FileName = path;
-            if(ptr)
+            if (ptr)
                 app.StartInfo.Arguments = "--BNetServer=test.actual.battle.net:1119 --cluster=PTR -uid prometheus_test";
 
 
@@ -101,106 +98,41 @@ namespace SmurfWalletOW.Service
             return app.MainWindowHandle;
         }
 
+
+
         private bool InsertCredentials(IntPtr wh, Account account, SecureString key, Settings settings)
         {
-            Native.SetForegroundWindow(wh);
-
             //check if full screen
             var isFullScreen = _fileService.IsOverwatchFullscreenAsync().Result;
             Thread.Sleep(2000);
             if (isFullScreen)
             {
-                SendKeys.SendWait("%{ENTER}");
+                _overwatchInteractionService.AltEnter(app.MainWindowHandle);
             }
+            _overwatchInteractionService.WaitForLoginScreen(app.MainWindowHandle, settings.LoadingTime);
+            _overwatchInteractionService.EnterKeys(app.MainWindowHandle, account.Email);
+            _overwatchInteractionService.PressTab(app.MainWindowHandle);
 
-            Color theColor = Color.FromArgb(255, 209, 209, 212);
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            bool loggedIn = false;
-            do
-            {
-                var img = GetScreenshot(wh);
-                int imgW = img.Width;
-                int imgH = img.Height;
-                int count = 0;
-                for (int z = 0; z < imgH; z++)
-                {
-                    for (int i = 0; i < imgW; i++)
-                    {
-                        Color pixelColor = img.GetPixel(i, z);
-                        if (pixelColor.Equals(theColor))
-                            count++;
-                    }
-                }
-                if (count > 1000)
-                    loggedIn = !loggedIn;
-                if (sw.Elapsed > TimeSpan.FromMilliseconds(settings.LoadingTime * 1000))
-                    break;
-                Thread.Sleep(1);
-            } while (!loggedIn);
-
-
-            sw.Stop();
-            SpecialSendKeys(account.Email);
-            Thread.Sleep(750);
-            SendKeys.SendWait("{TAB}");
-            Thread.Sleep(750);
             IntPtr valuePtr = IntPtr.Zero;
-            try
-            {
-                var pw = _encryptionService.DecryptString(key, account.Password, account.ManualEncryption);
-                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(pw);
+            var pw = _encryptionService.DecryptString(key, account.Password, account.ManualEncryption);
+            valuePtr = Marshal.SecureStringToGlobalAllocUnicode(pw);
 
-                for (int i = 0; i < pw.Length; i++)
-                {
-                    SpecialSendKeys(Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)).ToString());
-                }
-            }
-            finally
+            for (int i = 0; i < pw.Length; i++)
             {
-                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+                _overwatchInteractionService.EnterKeys(app.MainWindowHandle, Convert.ToChar(Marshal.ReadInt16(valuePtr, i * 2)).ToString());
             }
+            Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
 
             Thread.Sleep(750);
-            SendKeys.SendWait("{ENTER}");
+            _overwatchInteractionService.PressEnter(app.MainWindowHandle);
 
             if (isFullScreen)
             {
-                SendKeys.SendWait("%{ENTER}");
+                _overwatchInteractionService.AltEnter(app.MainWindowHandle);
             }
 
             return true;
         }
 
-        private void SpecialSendKeys(string line)
-        {
-            string txt = Regex.Replace(line, "[+^%~()]", "{$0}");
-            SendKeys.SendWait(txt);
-        }
-
-
-        private Bitmap GetScreenshot(IntPtr hwnd)
-        {
-            Native.RECT rect = new Native.RECT();
-
-            if (!Native.SetForegroundWindow(hwnd))
-                throw new Win32Exception(Marshal.GetLastWin32Error());
-
-            if (!Native.GetWindowRect(new HandleRef(null, hwnd), out rect))
-                throw new Win32Exception(Marshal.GetLastWin32Error());
-
-            Thread.Sleep(500);
-
-            Rectangle windowSize = rect.ToRectangle();
-            Bitmap target = new Bitmap(windowSize.Width, windowSize.Height);
-            using (Graphics g = Graphics.FromImage(target))
-            {
-                g.CopyFromScreen(windowSize.X, windowSize.Y, 0, 0, new Size(windowSize.Width, windowSize.Height));
-            }
-
-            return target;
-        }
-
-        
     }
 }

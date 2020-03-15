@@ -137,10 +137,12 @@
     <Compile Include="Service\Interface\IEncryptionService.cs" />
     <Compile Include="Service\Interface\IFileService.cs" />
     <Compile Include="Service\Interface\IOverwatchApiService.cs" />
+    <Compile Include="Service\Interface\IOverwatchInteractionService.cs" />
     <Compile Include="Service\Interface\IOverwatchService.cs" />
     <Compile Include="Service\Interface\IRegionService.cs" />
     <Compile Include="Service\Interface\IUpdateService.cs" />
     <Compile Include="Service\OverwatchApiService.cs" />
+    <Compile Include="Service\OverwatchInteractionService.cs" />
     <Compile Include="Service\OverwatchService.cs" />
     <Compile Include="Service\RegionService.cs" />
     <Compile Include="Service\UpdateService.cs" />

@@ -25,6 +25,8 @@ namespace SmurfWalletOW.ViewModel
             }
             else
             {
+
+                SimpleIoc.Default.Register<IOverwatchInteractionService, OverwatchInteractionService>();
                 SimpleIoc.Default.Register<IRegionService, RegionService>();
                 SimpleIoc.Default.Register<IFileService, FileService>();
                 SimpleIoc.Default.Register<IAppSettingsService, AppSettingsService>();

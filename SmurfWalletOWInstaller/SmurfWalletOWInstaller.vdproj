@@ -6899,15 +6899,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SmurfWalletOW"
-        "ProductCode" = "8:{8EAE00E9-5251-4236-B25A-41405B7BA6E2}"
-        "PackageCode" = "8:{04921C74-77EB-4295-9B38-73A553092D90}"
+        "ProductCode" = "8:{BF121339-4B96-460B-89CF-24783EAB73D4}"
+        "PackageCode" = "8:{666EA473-CE58-4B0E-8BF9-97CFE107D59D}"
         "UpgradeCode" = "8:{0ABD3B65-A55A-49F6-A7D8-22CF350AC019}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.7"
+        "ProductVersion" = "8:1.2.8"
         "Manufacturer" = "8:Imaleo"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -7463,7 +7463,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8044A10079484517A045AEE1B7547638"
             {
-            "SourcePath" = "8:..\\SmurfWalletOW\\obj\\Release\\SmurfWalletOW.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B479D868F9A34008B357D5D481DAA047"
