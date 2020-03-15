@@ -32,3 +32,10 @@ NEW VERSION 1.2.1 !!!!!
 NEW VERSION 1.2.2 !!!!!
 
 1) new feature that allows to see current rank if battletag is provided
+
+NEW VERSION 1.2.7 !!!!!
+
+1) new feature to update the software from inside
+2) new feature to log in into different regions and PTR
+3) enabled minimize
+
