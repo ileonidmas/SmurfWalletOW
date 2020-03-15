@@ -39,3 +39,7 @@ NEW VERSION 1.2.7 !!!!!
 2) new feature to log in into different regions and PTR
 3) enabled minimize
 
+NEW VERSION 1.2.8 !!!!!
+
+1) improved logging in fuctionality. Now the window does't have to be focused to insert credetials.
+
