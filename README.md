@@ -43,3 +43,7 @@ NEW VERSION 1.2.8 !!!!!
 
 1) improved logging in fuctionality. Now the window does't have to be focused to insert credetials.
 
+NEW VERSION 1.2.9 !!!!!
+
+1) updated discord link
+
