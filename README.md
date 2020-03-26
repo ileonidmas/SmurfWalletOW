@@ -13,7 +13,7 @@ Additionaly, in order to build an installer, you will have to install this packa
 
 NEW VERSION 1.1 !!!!!
 
-Now you can enable notification to receive messages in discord. For that you need to install new version of SmurfWalletOW which contains additional libraries, join discord server here https://discord.gg/VGCs3G4 and setup your discord tag in Settings. Video on how to use it will come as soon as it will get user tested and approved by blizzard
+Now you can enable notification to receive messages in discord. For that you need to install new version of SmurfWalletOW which contains additional libraries, join discord server here https://discord.gg/wKtsAWU and setup your discord tag in Settings. Video on how to use it will come as soon as it will get user tested and approved by blizzard
 
 
 NEW VERSION 1.2 !!!!!
@@ -38,4 +38,8 @@ NEW VERSION 1.2.7 !!!!!
 1) new feature to update the software from inside
 2) new feature to log in into different regions and PTR
 3) enabled minimize
+
+NEW VERSION 1.2.8 !!!!!
+
+1) improved logging in fuctionality. Now the window does't have to be focused to insert credetials.
 
