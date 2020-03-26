@@ -286,25 +286,25 @@
         "Entry"
         {
         "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
-        "OwnerKey" = "8:_D0EAB87BA323D394B3A3ABA67565F502"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
         "OwnerKey" = "8:_8044A10079484517A045AEE1B7547638"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
-        "OwnerKey" = "8:_2D718DED064CFA2814423D5E397448DA"
+        "OwnerKey" = "8:_D0EAB87BA323D394B3A3ABA67565F502"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
         "OwnerKey" = "8:_68C5D8151C26FE2E8C7C99CF6E28FAAF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
+        "OwnerKey" = "8:_2D718DED064CFA2814423D5E397448DA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1324,6 +1324,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_092BD3AFEA25057AF17473FC1F66B0CC"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1391,12 +1397,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D0EAB87BA323D394B3A3ABA67565F502"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_28C7DC089B0F8BD98CFA7A1D6235EA6E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -6899,15 +6899,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SmurfWalletOW"
-        "ProductCode" = "8:{BF121339-4B96-460B-89CF-24783EAB73D4}"
-        "PackageCode" = "8:{666EA473-CE58-4B0E-8BF9-97CFE107D59D}"
+        "ProductCode" = "8:{7B649981-3C51-4439-9D36-6E75EF89F061}"
+        "PackageCode" = "8:{AD209CE4-3758-4EC3-A4D6-9D8D49680894}"
         "UpgradeCode" = "8:{0ABD3B65-A55A-49F6-A7D8-22CF350AC019}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.8"
+        "ProductVersion" = "8:1.2.9"
         "Manufacturer" = "8:Imaleo"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -7463,7 +7463,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8044A10079484517A045AEE1B7547638"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\SmurfWalletOW\\obj\\Release\\SmurfWalletOW.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B479D868F9A34008B357D5D481DAA047"
