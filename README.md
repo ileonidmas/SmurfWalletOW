@@ -47,3 +47,7 @@ NEW VERSION 1.2.9 !!!!!
 
 1) updated discord link
 
+NEW VERSION 1.3.0 !!!!!
+
+1) fixed issue with logging in
+
