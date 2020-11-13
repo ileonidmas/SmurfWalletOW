@@ -110,6 +110,8 @@ namespace SmurfWalletOW.Service
                 _overwatchInteractionService.AltEnter(app.MainWindowHandle);
             }
             _overwatchInteractionService.WaitForLoginScreen(app.MainWindowHandle, settings.LoadingTime);
+            _overwatchInteractionService.ClickWindow(app.MainWindowHandle);
+            
             _overwatchInteractionService.EnterKeys(app.MainWindowHandle, account.Email);
             _overwatchInteractionService.PressTab(app.MainWindowHandle);
 

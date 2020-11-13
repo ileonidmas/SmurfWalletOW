@@ -34,6 +34,9 @@ namespace SmurfWalletOW.Util
         public const UInt32 SW_SHOWNA = 8;
         public const UInt32 SW_RESTORE = 9;
 
+        public const int WM_LBUTTONDOWN = 0x0201;
+        public const int WM_LBUTTONUP = 0x0202;
+
         [DllImport("NotificationDll.dll")]
         public static extern void SetWindowHandle(IntPtr hWnd);
 
@@ -48,6 +51,11 @@ namespace SmurfWalletOW.Util
 
         [DllImport("user32.dll")]
         public static extern bool GetClientRect(HandleRef hWnd, out RECT lpRect);
+
+        [DllImport("User32.DLL")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        public static int MakeLParam(int x, int y) => ((y << 16) | (x & 0xFFFF));
 
         [DllImport("user32.dll")]
         public static extern bool MoveWindow(IntPtr handle, int x, int y, int width, int height, bool redraw);

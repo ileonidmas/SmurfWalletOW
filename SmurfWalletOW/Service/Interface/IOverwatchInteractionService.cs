@@ -9,5 +9,6 @@ namespace SmurfWalletOW.Service.Interface
         void PressTab(IntPtr wh);
         void PressEnter(IntPtr wh);
         void WaitForLoginScreen(IntPtr wh, double timeout);
+        void ClickWindow(IntPtr wh);
     }
 }

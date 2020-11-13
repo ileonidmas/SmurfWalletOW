@@ -1,18 +1,41 @@
-﻿using SmurfWalletOW.Service.Interface;
+﻿
+using SmurfWalletOW.Service.Interface;
 using SmurfWalletOW.Util;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace SmurfWalletOW.Service
 {
     public class OverwatchInteractionService : IOverwatchInteractionService
     {
+        public void ClickWindow(IntPtr wh)
+        {            
+            Native.RECT rect = new Native.RECT();
+            if (!Native.GetWindowRect(new HandleRef(null, wh), out rect))
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+            Rectangle windowSize = rect.ToRectangle();
+            int y = 20 ;
+            int x = 20;
+            Native.PostMessage(wh, Native.WM_LBUTTONDOWN, 0, Native.MakeLParam(x, y));
+            Thread.Sleep(100);
+            Native.PostMessage(wh, Native.WM_LBUTTONUP, 0, Native.MakeLParam(x, y));
+            Thread.Sleep(100);
+        }
+
+       
+
+        private IntPtr MakeLParam(int LoWord, int HiWord)
+        {
+            return (IntPtr)((HiWord << 16) | (LoWord & 0xffff));
+        }
 
         public void WaitForLoginScreen(IntPtr wh, double timeout)
         {
